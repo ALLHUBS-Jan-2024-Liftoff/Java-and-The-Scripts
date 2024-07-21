@@ -23,6 +23,12 @@ public class TravelPlanController {
         return travelPlanRepository.save(travelPlan);
     }
 
+    // GET ALL TRAVEL PLANS
+    @GetMapping("/")
+    public List<TravelPlan> getAllTravelPlans() {
+        return travelPlanRepository.findAll();
+    }
+
     // GET ALL TRAVEL PLANS FOR A USER
     @GetMapping("user/{userId}")
     public List<TravelPlan> getTravelPlansByUserId(@PathVariable Long userId) {
@@ -50,10 +56,13 @@ public class TravelPlanController {
     }
 
     // DELETE A TRAVEL PLAN
-    @PostMapping("/delete")
-    public void deleteTravelPlan(@PathVariable Long id) {
-        travelPlanRepository.deleteById(id);
+    @DeleteMapping("/{id}")
+    public String deleteTravelPlan(@PathVariable Long id) {
+        if (travelPlanRepository.existsById(id)) {
+            travelPlanRepository.deleteById(id);
+            return "Travel plan deleted successfully.";
+        } else {
+            return "Travel plan does not exist.";
+        }
     }
-
-
 }
