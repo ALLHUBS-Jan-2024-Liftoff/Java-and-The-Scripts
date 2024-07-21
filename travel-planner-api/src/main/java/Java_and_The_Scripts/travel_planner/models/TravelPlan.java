@@ -13,16 +13,10 @@ public class TravelPlan {
     private String destination;
     private String startDate;
     private String endDate;
+    private String description;
+
 
     public TravelPlan() {
-    }
-
-    public TravelPlan(Long id, Long userId, String destination, String startDate, String endDate) {
-        this.id = id;
-        this.userId = userId;
-        this.destination = destination;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
     public Long getId() {
@@ -31,6 +25,14 @@ public class TravelPlan {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getDestination() {
@@ -57,8 +59,11 @@ public class TravelPlan {
         this.endDate = endDate;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getDescription() {
+        return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
