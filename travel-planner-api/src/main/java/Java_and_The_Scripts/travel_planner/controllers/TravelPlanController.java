@@ -62,7 +62,7 @@ public class TravelPlanController {
             travelPlanRepository.deleteById(id);
             return "Travel plan deleted successfully.";
         } else {
-            return "Travel plan does not exist.";
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Travel plan does not exist.");
         }
     }
 }
