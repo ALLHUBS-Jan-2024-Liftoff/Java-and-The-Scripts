@@ -1,6 +1,7 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
 import Java_and_The_Scripts.travel_planner.models.User;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +19,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public String logIn(@ModelAttribute User user) {
+    public String logIn(@ModelAttribute @Valid User user) {
         // TODO
         // Connect User repository
         // Authenticate with login information
