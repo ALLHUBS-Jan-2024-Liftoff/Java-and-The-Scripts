@@ -4,14 +4,21 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class User {
+
+    @Email
     @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "email")
+    private String email;
+
+    @Size(min = 8, max = 20)
+    @Column(name = "password")
+    private String password;
 
     @NotNull
     @Column(name = "first_name")
@@ -23,10 +30,26 @@ public class User {
 
     public User(){}
 
-    public User(Long id, String firstName, String lastName) {
-        this.id = id;
+    public User(String email, String firstName, String lastName) {
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -44,13 +67,4 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }
