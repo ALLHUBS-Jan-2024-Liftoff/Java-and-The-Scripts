@@ -1,6 +1,6 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
-import Java_and_The_Scripts.travel_planner.models.data.User;
+import Java_and_The_Scripts.travel_planner.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
