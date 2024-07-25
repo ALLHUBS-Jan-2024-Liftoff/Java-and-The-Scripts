@@ -3,7 +3,10 @@ package Java_and_The_Scripts.travel_planner.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.ArrayList;
 
 @Entity
 public class TravelPlan {
@@ -21,6 +24,10 @@ public class TravelPlan {
     private String endDate;
 
     private String description;
+
+    // ONE TRAVEL PLAN FOR MANY ACTIVITIES
+    @OneToMany(mappedBy = "travelPlan")
+    private List<Activity> activities = new ArrayList<>();
 
     // NO ARGUMENT CONSTRUCTOR
     public TravelPlan() {
@@ -49,10 +56,6 @@ public class TravelPlan {
 
     public Long getUserId() {
         return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getDestination() {
