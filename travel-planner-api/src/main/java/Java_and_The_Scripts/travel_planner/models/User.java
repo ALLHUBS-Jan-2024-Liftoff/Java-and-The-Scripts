@@ -21,13 +21,19 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    //No argument constructor
+
     public User(){}
+
+    // Constructors
 
     public User(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+    // Setters and getters
 
     public String getFirstName() {
         return firstName;

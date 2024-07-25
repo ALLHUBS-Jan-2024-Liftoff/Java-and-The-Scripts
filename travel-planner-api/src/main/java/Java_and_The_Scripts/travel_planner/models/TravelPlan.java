@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class TravelPlan {
@@ -26,7 +27,7 @@ public class TravelPlan {
     private String description;
 
     // ONE TRAVEL PLAN FOR MANY ACTIVITIES
-    @OneToMany(mappedBy = "travelPlan")
+    @OneToMany(mappedBy = "description")
     private List<Activity> activities = new ArrayList<>();
 
     // NO ARGUMENT CONSTRUCTOR
