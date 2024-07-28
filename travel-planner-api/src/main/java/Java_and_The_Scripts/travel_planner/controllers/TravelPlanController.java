@@ -1,7 +1,11 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
-import Java_and_The_Scripts.travel_planner.entites.TravelPlanEntity;
+import Java_and_The_Scripts.travel_planner.entities.EntityMapper;
+import Java_and_The_Scripts.travel_planner.entities.TravelPlanEntity;
+import Java_and_The_Scripts.travel_planner.models.TravelPlan;
 import Java_and_The_Scripts.travel_planner.repositories.TravelPlanRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +18,15 @@ import java.util.Optional;
 @RequestMapping("/api/travelplans")
 public class TravelPlanController {
 
+    private static final Logger log = LoggerFactory.getLogger(TravelPlanController.class);
     @Autowired
     private TravelPlanRepository travelPlanRepository;
 
     // CREATE A NEW TRAVEL PLAN
     @PostMapping("/new")
-    public TravelPlanEntity createTravelPlan(@RequestBody TravelPlanEntity travelPlanEntity) {
+    public TravelPlanEntity createTravelPlan(@RequestBody TravelPlan travelPlan) {
+
+        TravelPlanEntity travelPlanEntity = EntityMapper.mapper.travelPlanToTravelPlanEntity(travelPlan);
         return travelPlanRepository.save(travelPlanEntity);
     }
 
@@ -43,11 +50,12 @@ public class TravelPlanController {
 
     // UPDATE EXISTING TRAVEL PLAN
     @PutMapping("/{id}")
-    public String updateTravelPlan(@PathVariable Long id, @RequestBody TravelPlanEntity travelPlanEntity) {
+    public String updateTravelPlan(@PathVariable Long id, @RequestBody TravelPlan travelPlan) {
         if (travelPlanRepository.existsById(id)) {
+            TravelPlanEntity travelPlanEntity = EntityMapper.mapper.travelPlanToTravelPlanEntity(travelPlan);
             travelPlanEntity.setId(id);
 
-            TravelPlanEntity updatedPlan = travelPlanRepository.save(travelPlanEntity);
+            travelPlanRepository.save(travelPlanEntity);
 
             return "Travel plan updated successfully.";
         } else {

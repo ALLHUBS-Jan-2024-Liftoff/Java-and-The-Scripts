@@ -1,6 +1,6 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
-import Java_and_The_Scripts.travel_planner.entites.ReviewEntity;
+import Java_and_The_Scripts.travel_planner.entities.ReviewEntity;
 import Java_and_The_Scripts.travel_planner.repositories.ActivityRepository;
 import Java_and_The_Scripts.travel_planner.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,51 +1,28 @@
-package Java_and_The_Scripts.travel_planner.entites;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotBlank;
+package Java_and_The_Scripts.travel_planner.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class TravelPlanEntity {
-    @Id
-    @GeneratedValue
+public class TravelPlan {
     private Long id;
-
-    private Long userId;
-
-    @NotBlank(message = "Destination is required")
+    private User user;
     private String destination;
-
     private String startDate;
-
     private String endDate;
-
     private String description;
-
-    // ONE TRAVEL PLAN FOR MANY ACTIVITIES
-    @OneToMany(mappedBy = "description")
     private List<Activity> activities = new ArrayList<>();
 
-    // NO ARGUMENT CONSTRUCTOR
-    public TravelPlanEntity() {
-    }
-
-    // CONSTRUCTOR
-    public TravelPlanEntity(Long id, Long userId, String destination, String startDate, String endDate, String description) {
+    public TravelPlan(Long id, User user, String destination, String startDate, String endDate, String description, List<Activity> activities) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.destination = destination;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
+        this.activities = activities;
     }
 
-    //GETTERS AND SETTERS
-
+    public TravelPlan() {}
 
     public Long getId() {
         return id;
@@ -55,8 +32,12 @@ public class TravelPlanEntity {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDestination() {
@@ -89,5 +70,13 @@ public class TravelPlanEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
     }
 }
