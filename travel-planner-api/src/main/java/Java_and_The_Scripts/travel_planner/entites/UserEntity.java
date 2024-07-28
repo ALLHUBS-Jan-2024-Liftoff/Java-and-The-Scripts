@@ -1,4 +1,4 @@
-package Java_and_The_Scripts.travel_planner.models;
+package Java_and_The_Scripts.travel_planner.entites;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -23,11 +23,11 @@ public class User {
 
     //No argument constructor
 
-    public User(){}
+    public UserEntity(){}
 
     // Constructors
 
-    public User(Long id, String firstName, String lastName) {
+    public UserEntity(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

@@ -1,6 +1,6 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
-import Java_and_The_Scripts.travel_planner.models.TravelPlan;
+import Java_and_The_Scripts.travel_planner.entites.TravelPlanEntity;
 import Java_and_The_Scripts.travel_planner.repositories.TravelPlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,35 +19,35 @@ public class TravelPlanController {
 
     // CREATE A NEW TRAVEL PLAN
     @PostMapping("/new")
-    public TravelPlan createTravelPlan(@RequestBody TravelPlan travelPlan) {
-        return travelPlanRepository.save(travelPlan);
+    public TravelPlanEntity createTravelPlan(@RequestBody TravelPlanEntity travelPlanEntity) {
+        return travelPlanRepository.save(travelPlanEntity);
     }
 
     // GET ALL TRAVEL PLANS
     @GetMapping("/")
-    public List<TravelPlan> getAllTravelPlans() {
+    public List<TravelPlanEntity> getAllTravelPlans() {
         return travelPlanRepository.findAll();
     }
 
     // GET ALL TRAVEL PLANS FOR A USER
     @GetMapping("user/{userId}")
-    public List<TravelPlan> getTravelPlansByUserId(@PathVariable Long userId) {
+    public List<TravelPlanEntity> getTravelPlansByUserId(@PathVariable Long userId) {
         return travelPlanRepository.findByUserId(userId);
     }
 
     // GET TRAVEL PLAN BY ID
     @GetMapping("/{id}")
-    public Optional<TravelPlan> getTravelPlansById(@PathVariable Long id) {
+    public Optional<TravelPlanEntity> getTravelPlansById(@PathVariable Long id) {
         return travelPlanRepository.findById(id);
     }
 
     // UPDATE EXISTING TRAVEL PLAN
     @PutMapping("/{id}")
-    public String updateTravelPlan(@PathVariable Long id, @RequestBody TravelPlan travelPlan) {
+    public String updateTravelPlan(@PathVariable Long id, @RequestBody TravelPlanEntity travelPlanEntity) {
         if (travelPlanRepository.existsById(id)) {
-            travelPlan.setId(id);
+            travelPlanEntity.setId(id);
 
-            TravelPlan updatedPlan = travelPlanRepository.save(travelPlan);
+            TravelPlanEntity updatedPlan = travelPlanRepository.save(travelPlanEntity);
 
             return "Travel plan updated successfully.";
         } else {

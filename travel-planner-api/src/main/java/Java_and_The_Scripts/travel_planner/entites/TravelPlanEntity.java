@@ -1,4 +1,4 @@
-package Java_and_The_Scripts.travel_planner.models;
+package Java_and_The_Scripts.travel_planner.entites;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class TravelPlan {
+public class TravelPlanEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -31,11 +31,11 @@ public class TravelPlan {
     private List<Activity> activities = new ArrayList<>();
 
     // NO ARGUMENT CONSTRUCTOR
-    public TravelPlan() {
+    public TravelPlanEntity() {
     }
 
     // CONSTRUCTOR
-    public TravelPlan(Long id, Long userId, String destination, String startDate, String endDate, String description) {
+    public TravelPlanEntity(Long id, Long userId, String destination, String startDate, String endDate, String description) {
         this.id = id;
         this.userId = userId;
         this.destination = destination;

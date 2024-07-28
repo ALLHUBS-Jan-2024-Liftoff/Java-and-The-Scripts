@@ -1,13 +1,12 @@
-package Java_and_The_Scripts.travel_planner.models;
+package Java_and_The_Scripts.travel_planner.entites;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class Review {
+public class ReviewEntity {
 
     @Id
     @GeneratedValue
@@ -24,10 +23,10 @@ public class Review {
     private int rating;
 
     // DEFAULT CONSTRUCTOR
-    public Review() {
+    public ReviewEntity() {
     }
 
-    public Review(Activity activity, String reviewDescription, int rating) {
+    public ReviewEntity(Activity activity, String reviewDescription, int rating) {
         this.activity = activity;
         this.reviewDescription = reviewDescription;
         this.rating = rating;

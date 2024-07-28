@@ -1,6 +1,7 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
-import Java_and_The_Scripts.travel_planner.models.Review;
+import Java_and_The_Scripts.travel_planner.entites.ReviewEntity;
+import Java_and_The_Scripts.travel_planner.repositories.ActivityRepository;
 import Java_and_The_Scripts.travel_planner.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,22 +22,22 @@ public class ReviewController {
 
     // CREATE A NEW REVIEW
     @PostMapping("/new")
-    public Review createReview(@RequestBody Review review) {
-        return reviewRepository.save(review);
+    public ReviewEntity createReview(@RequestBody ReviewEntity reviewEntity) {
+        return reviewRepository.save(reviewEntity);
     }
 
     // GET REVIEW BY ID
     @GetMapping("/{id}")
-    public Optional<Review> getReviewById(@PathVariable Long id) {
+    public Optional<ReviewEntity> getReviewById(@PathVariable Long id) {
         return reviewRepository.findById(id);
     }
 
     // UPDATE EXISTING REVIEW
     @PutMapping("/{id}")
-    public String updateReview(@PathVariable Long id, @RequestBody Review review) {
+    public String updateReview(@PathVariable Long id, @RequestBody ReviewEntity reviewEntity) {
         if (reviewRepository.existsById(id)) {
-            review.setId(id);
-            reviewRepository.save(review);
+            reviewEntity.setId(id);
+            reviewRepository.save(reviewEntity);
             return "Review updated successfully.";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review not found.");

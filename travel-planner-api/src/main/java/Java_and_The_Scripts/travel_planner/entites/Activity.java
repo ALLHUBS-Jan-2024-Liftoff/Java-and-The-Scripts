@@ -1,4 +1,4 @@
-package Java_and_The_Scripts.travel_planner.models;
+package Java_and_The_Scripts.travel_planner.entites;
 
 import jakarta.persistence.*;
 
@@ -17,18 +17,18 @@ public class Activity {
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="user_id")
-    private User user;
+    private UserEntity userEntity;
 
     public Activity(){
     }
 
     // Constructor
 
-    public Activity(long activityID, long description, int day, User user) {
+    public Activity(long activityID, long description, int day, UserEntity userEntity) {
         this.activityID = activityID;
         this.description = description;
         this.day = day;
-        this.user = user;
+        this.userEntity = userEntity;
     }
 
 
@@ -59,11 +59,11 @@ public class Activity {
         this.day = day;
     }
 
-    public User getUser() {
-        return user;
+    public UserEntity getUser() {
+        return userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }
