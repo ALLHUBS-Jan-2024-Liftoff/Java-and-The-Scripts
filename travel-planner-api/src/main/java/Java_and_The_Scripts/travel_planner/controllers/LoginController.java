@@ -2,12 +2,9 @@ package Java_and_The_Scripts.travel_planner.controllers;
 
 import Java_and_The_Scripts.travel_planner.models.data.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("login")
 public class LoginController {
     @GetMapping
