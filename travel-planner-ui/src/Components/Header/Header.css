@@ -1,0 +1,36 @@
+/* Ensure the header sticks to the top and spans the full width */
+.header {
+  position: fixed; /* Stick to the top of the page */
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of the viewport */
+  background-color: #007bff; /* Bootstrap primary color or your choice */
+  z-index: 1000; /* Ensure it stays above other content */
+}
+
+/* Style the navbar inside the header */
+.navbar {
+  padding: 0.5rem 1rem; /* Adjust padding to your preference */
+}
+
+/* Center the brand and nav items */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff; /* White text */
+}
+
+.navbar-nav {
+  margin-left: auto; /* Pushes nav items to the right */
+}
+
+.nav-link {
+  color: #ffffff !important; /* Ensures links are white */
+  margin-left: 1rem; /* Space between nav items */
+}
+
+.nav-link:hover {
+  color: #cccccc !important; /* Light color on hover for better visibility */
+}
+
+
