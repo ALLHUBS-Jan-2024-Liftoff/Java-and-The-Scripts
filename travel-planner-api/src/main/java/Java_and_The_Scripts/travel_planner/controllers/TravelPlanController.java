@@ -1,7 +1,11 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
+import Java_and_The_Scripts.travel_planner.entities.EntityMapper;
+import Java_and_The_Scripts.travel_planner.entities.TravelPlanEntity;
 import Java_and_The_Scripts.travel_planner.models.TravelPlan;
 import Java_and_The_Scripts.travel_planner.repositories.TravelPlanRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,30 +18,33 @@ import java.util.Optional;
 @RequestMapping("/api/travelplans")
 public class TravelPlanController {
 
+    private static final Logger log = LoggerFactory.getLogger(TravelPlanController.class);
     @Autowired
     private TravelPlanRepository travelPlanRepository;
 
     // CREATE A NEW TRAVEL PLAN
     @PostMapping("/new")
-    public TravelPlan createTravelPlan(@RequestBody TravelPlan travelPlan) {
-        return travelPlanRepository.save(travelPlan);
+    public TravelPlanEntity createTravelPlan(@RequestBody TravelPlan travelPlan) {
+
+        TravelPlanEntity travelPlanEntity = EntityMapper.mapper.travelPlanToTravelPlanEntity(travelPlan);
+        return travelPlanRepository.save(travelPlanEntity);
     }
 
     // GET ALL TRAVEL PLANS
     @GetMapping("/")
-    public List<TravelPlan> getAllTravelPlans() {
+    public List<TravelPlanEntity> getAllTravelPlans() {
         return travelPlanRepository.findAll();
     }
 
     // GET ALL TRAVEL PLANS FOR A USER
     @GetMapping("user/{userId}")
-    public List<TravelPlan> getTravelPlansByUserId(@PathVariable Long userId) {
+    public List<TravelPlanEntity> getTravelPlansByUserId(@PathVariable Long userId) {
         return travelPlanRepository.findByUserId(userId);
     }
 
     // GET TRAVEL PLAN BY ID
     @GetMapping("/{id}")
-    public Optional<TravelPlan> getTravelPlansById(@PathVariable Long id) {
+    public Optional<TravelPlanEntity> getTravelPlansById(@PathVariable Long id) {
         return travelPlanRepository.findById(id);
     }
 
@@ -45,9 +52,10 @@ public class TravelPlanController {
     @PutMapping("/{id}")
     public String updateTravelPlan(@PathVariable Long id, @RequestBody TravelPlan travelPlan) {
         if (travelPlanRepository.existsById(id)) {
-            travelPlan.setId(id);
+            TravelPlanEntity travelPlanEntity = EntityMapper.mapper.travelPlanToTravelPlanEntity(travelPlan);
+            travelPlanEntity.setId(id);
 
-            TravelPlan updatedPlan = travelPlanRepository.save(travelPlan);
+            travelPlanRepository.save(travelPlanEntity);
 
             return "Travel plan updated successfully.";
         } else {

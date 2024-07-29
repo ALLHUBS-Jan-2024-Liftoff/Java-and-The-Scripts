@@ -1,39 +1,20 @@
 package Java_and_The_Scripts.travel_planner.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
-
-@Entity
 public class Review {
-
-    @Id
-    @GeneratedValue
     private Long id;
-
-
-    // MANY TO ONE ACTIVITY TO REVIEWS
-    @ManyToOne
     private Activity activity;
-
     private String reviewDescription;
-
-    // RATING SCALE TO BE DECIDED
     private int rating;
 
-    // DEFAULT CONSTRUCTOR
     public Review() {
     }
 
-    public Review(Activity activity, String reviewDescription, int rating) {
+    public Review(Long id, Activity activity, String reviewDescription, int rating) {
+        this.id = id;
         this.activity = activity;
         this.reviewDescription = reviewDescription;
         this.rating = rating;
     }
-
-    // GETTERS AND SETTERS
 
     public Long getId() {
         return id;
