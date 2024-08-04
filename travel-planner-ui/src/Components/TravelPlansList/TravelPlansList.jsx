@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios'; 
+import { Link } from 'react-router-dom';
 
-const TravelPlanList = () => {
+const TravelPlansList = () => {
     const [travelPlans, setTravelPlans] = useState([]); 
 
 
@@ -10,23 +12,19 @@ const TravelPlanList = () => {
             .then(response => {
 
                 setTravelPlans(response.data);
-
-            }); 
+            })
+            .catch(error => {
+                console.error('Error fetching travel plans:', error);
+            });
 }, []); 
 
 return (
     <div>
         <h1>All Travel Plans</h1>
-        <ul>
-            {travelPlans.map(plan => (
-                <li key={plan.id}>
-                    <Link to={`/travel-plans/${plan.id}`}>{plan.destination}</Link>
-                </li>
-            ))}
-        </ul>
+            <p>No travel plans available.</p>
     </div>
 );
 
-}
+};
 
 export default TravelPlansList; 
