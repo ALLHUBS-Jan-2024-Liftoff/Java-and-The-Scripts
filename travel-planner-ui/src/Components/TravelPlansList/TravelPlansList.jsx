@@ -1,25 +1,27 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios'; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { dataForTravelPlans } from '../../TestingData/TestingData';
 
 const TravelPlansList = () => {
     const [travelPlans, setTravelPlans] = useState([]); 
-
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // axios.get('/api/travelplans')
-        //     .then(response => {
+        axios.get('/api/travelplans')
+            .then(response => {
 
-        //         setTravelPlans(response.data);
-        //     })
-        //     .catch(error => {
-        //         console.error('Error fetching travel plans:', error);
-        //     });
-
-        setTravelPlans(dataForTravelPlans);
+                setTravelPlans(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching travel plans:', error);
+            });
 }, []); 
+
+const handleEdit = (id) => {
+    navigate(`/edit-travel-plan/${id}`);
+};
 
 return (
     <div>

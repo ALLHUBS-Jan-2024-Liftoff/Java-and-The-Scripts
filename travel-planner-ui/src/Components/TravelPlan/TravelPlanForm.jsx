@@ -1,112 +1,118 @@
-// src/components/TravelPlan/TravelPlanForm.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import './TravelPlanForm.css';
 
 const TravelPlanForm = () => {
-  const [formData, setFormData] = useState({
-    user: '',
+  const [travelPlan, setTravelPlan] = useState({
     destination: '',
     startDate: '',
     endDate: '',
     description: '',
-    activities: '',
+    activities: [''],
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setTravelPlan({ 
+      ...travelPlan, 
+      [name]: value 
+    });
+  };
+
+  const handleActivityChange = (index, event) => {
+    const newActivities = [...travelPlan.activities];
+    newActivities[index] = event.target.value;
+    setTravelPlan((prevPlan) => ({
+      ...prevPlan,
+      activities: newActivities,
+    }));
+  };
+
+  const addActivity = () => {
+    setTravelPlan((prevPlan) => ({
+      ...prevPlan,
+      activities: [...prevPlan.activities, ''],
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Convert activities string to array
-    const dataToSubmit = { ...formData, activities: formData.activities.split(',').map(activity => activity.trim()) };
     try {
-      const response = await axios.post('/api/travelplans/new', dataToSubmit);
-      console.log(response.data);
+      await axios.post('/api/travelplans', travelPlan);
+      alert("Travel plan created successfully.");
       // Reset form after successful submission
-      setFormData({
-        user: '',
+      setTravelPlan({
         destination: '',
         startDate: '',
         endDate: '',
         description: '',
-        activities: '',
+        activities: [''],
       });
-      alert('Travel plan created successfully');
     } catch (error) {
       console.error('There was an error creating the travel plan!', error);
+      alert("There was an error creating the travel plan.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="travel-plan-form">
-      <div className="form-group">
-        <label htmlFor="user">User</label>
-        <input
-          type="text"
-          id="user"
-          name="user"
-          value={formData.user}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="destination">Destination</label>
-        <input
-          type="text"
-          id="destination"
-          name="destination"
-          value={formData.destination}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="startDate">Start Date</label>
-        <input
-          type="date"
-          id="startDate"
-          name="startDate"
-          value={formData.startDate}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="endDate">End Date</label>
-        <input
-          type="date"
-          id="endDate"
-          name="endDate"
-          value={formData.endDate}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-        ></textarea>
-      </div>
-      <div className="form-group">
-        <label htmlFor="activities">Activities (comma separated)</label>
-        <input
-          type="text"
-          id="activities"
-          name="activities"
-          value={formData.activities}
-          onChange={handleChange}
-        />
-      </div>
-      <button type="submit">Create Travel Plan</button>
-    </form>
+    <div>
+      <h1>Create Travel Plan</h1>
+      <form onSubmit={handleSubmit} className="travel-plan-form">
+        <label>
+          Destination:
+          <input
+            type="text"
+            id="destination"
+            name="destination"
+            value={travelPlan.destination}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          Start Date:
+          <input 
+            type="date"
+            name="startDate"
+            value={travelPlan.startDate}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          End Date:
+          <input 
+            type="date"
+            name="endDate"
+            value={travelPlan.endDate}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          Description:
+          <textarea 
+            name="description"
+            value={travelPlan.description}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>Activities:</label>
+        {travelPlan.activities.map((activity, index) => (
+          <div key={index}>
+            <input
+              type="text"
+              value={activity}
+              onChange={(event) => handleActivityChange(index, event)}
+              required
+            />
+          </div>
+        ))}
+        <button type="button" onClick={addActivity}>Add Activity</button>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   );
 };
 
