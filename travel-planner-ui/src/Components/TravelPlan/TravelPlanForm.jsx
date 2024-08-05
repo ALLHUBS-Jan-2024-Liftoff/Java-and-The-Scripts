@@ -8,7 +8,7 @@ const TravelPlanForm = () => {
     startDate: '',
     endDate: '',
     description: '',
-    activities: [''],
+    activities: [],
   });
 
   const handleChange = (e) => {
@@ -38,7 +38,7 @@ const TravelPlanForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/travelplans', travelPlan);
+      await axios.post('/api/travelplans/new', travelPlan); // Updated endpoint
       alert("Travel plan created successfully.");
       // Reset form after successful submission
       setTravelPlan({
@@ -46,7 +46,7 @@ const TravelPlanForm = () => {
         startDate: '',
         endDate: '',
         description: '',
-        activities: [''],
+        activities: [],
       });
     } catch (error) {
       console.error('There was an error creating the travel plan!', error);
@@ -105,7 +105,6 @@ const TravelPlanForm = () => {
               type="text"
               value={activity}
               onChange={(event) => handleActivityChange(index, event)}
-              required
             />
           </div>
         ))}

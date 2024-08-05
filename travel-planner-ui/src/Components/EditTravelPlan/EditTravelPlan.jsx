@@ -1,58 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const EditTravelPlan = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  
   const [travelPlan, setTravelPlan] = useState({
     destination: '',
     startDate: '',
     endDate: '',
     description: '',
-    activities: [] // Ensure activities is initialized as an array
+    activities: [],
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`/api/travelplans/${id}`)
-      .then(response => {
-        const data = response.data;
-        setTravelPlan({
-          destination: data.destination || '',
-          startDate: data.startDate || '',
-          endDate: data.endDate || '',
-          description: data.description || '',
-          activities: data.activities || [] // Ensure activities is always an array
-        });
-      })
-      .catch(error => {
+    const fetchTravelPlan = async () => {
+      try {
+        const response = await axios.get(`/api/travelplans/${id}`);
+        setTravelPlan(response.data);
+      } catch (error) {
         console.error('Error fetching travel plan:', error);
-      });
+      }
+    };
+
+    fetchTravelPlan();
   }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setTravelPlan({ 
-      ...travelPlan, 
-      [name]: value 
+    setTravelPlan({
+      ...travelPlan,
+      [name]: value,
     });
   };
 
-  const handleActivityChange = (index, e) => {
+  const handleActivityChange = (index, event) => {
     const newActivities = [...travelPlan.activities];
-    newActivities[index] = e.target.value;
-    setTravelPlan({ 
-      ...travelPlan, 
-      activities: newActivities 
-    });
+    newActivities[index] = event.target.value;
+    setTravelPlan((prevPlan) => ({
+      ...prevPlan,
+      activities: newActivities,
+    }));
   };
 
   const addActivity = () => {
-    setTravelPlan({
-      ...travelPlan,
-      activities: [...travelPlan.activities, '']
-    });
+    setTravelPlan((prevPlan) => ({
+      ...prevPlan,
+      activities: [...prevPlan.activities, ''],
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -62,8 +57,8 @@ const EditTravelPlan = () => {
       alert("Travel plan updated successfully.");
       navigate('/travel-plans');
     } catch (error) {
-      console.error('There was an issue updating the travel plan:', error);
-      alert("There was an error updating the travel plan. Please try again.");
+      console.error('Error updating travel plan:', error.response || error);
+      alert("There was an error updating the travel plan.");
     }
   };
 
@@ -78,6 +73,7 @@ const EditTravelPlan = () => {
             name="destination"
             value={travelPlan.destination}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -87,6 +83,7 @@ const EditTravelPlan = () => {
             name="startDate"
             value={travelPlan.startDate}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -96,6 +93,7 @@ const EditTravelPlan = () => {
             name="endDate"
             value={travelPlan.endDate}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -104,6 +102,7 @@ const EditTravelPlan = () => {
             name="description"
             value={travelPlan.description}
             onChange={handleChange}
+            required
           />
         </label>
         <label>Activities:</label>
@@ -117,7 +116,7 @@ const EditTravelPlan = () => {
           </div>
         ))}
         <button type="button" onClick={addActivity}>Add Activity</button>
-        <button type="submit">Save</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
