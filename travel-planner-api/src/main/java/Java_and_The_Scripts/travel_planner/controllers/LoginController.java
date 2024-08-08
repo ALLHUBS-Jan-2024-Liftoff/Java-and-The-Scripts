@@ -1,11 +1,18 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
 import Java_and_The_Scripts.travel_planner.models.Login;
+import Java_and_The_Scripts.travel_planner.repositories.UserRepository;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("login")
 public class LoginController {
+
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping
     public String displayLoginForm() {
 
@@ -14,7 +21,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public String logIn(@ModelAttribute Login login) {
+    public String logIn(@ModelAttribute @Valid Login login) {
         // TODO
         // Connect User repository
         // Authenticate with login information
