@@ -1,7 +1,6 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
-import Java_and_The_Scripts.travel_planner.models.data.User;
-import org.springframework.stereotype.Controller;
+import Java_and_The_Scripts.travel_planner.models.Login;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,7 +14,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public String logIn(@ModelAttribute User user) {
+    public String logIn(@ModelAttribute Login login) {
         // TODO
         // Connect User repository
         // Authenticate with login information
