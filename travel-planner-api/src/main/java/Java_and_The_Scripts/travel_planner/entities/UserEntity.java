@@ -25,13 +25,18 @@ public class UserEntity {
     @Column(name = "last_name")
     private String lastName;
 
+    @NotNull
+    @Column(name = "password")
+    private String password;
+
     public UserEntity(){}
 
-    public UserEntity(Long id, String email, String firstName, String lastName) {
+    public UserEntity(Long id, String email, String firstName, String lastName, String password) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
     }
 
     public Long getId() {
@@ -61,4 +66,8 @@ public class UserEntity {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
 }

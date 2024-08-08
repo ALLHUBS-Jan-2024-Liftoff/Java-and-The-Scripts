@@ -12,4 +12,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query(value = "FROM UserEntity user WHERE user.email = :emailPassed")
     UserEntity findByEmail(@Param("emailPassed") String email);
+
+    boolean existsUserByEmail(String email);
 }
