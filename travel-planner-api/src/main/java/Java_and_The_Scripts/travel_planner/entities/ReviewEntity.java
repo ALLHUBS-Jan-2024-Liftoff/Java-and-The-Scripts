@@ -16,6 +16,10 @@ public class ReviewEntity {
     @JoinColumn(name = "activity_id")
     private ActivityEntity activityEntity;
 
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user_id")
+    private UserEntity userEntity;
+
     private String reviewDescription;
 
     // RATING SCALE TO BE DECIDED
@@ -63,5 +67,13 @@ public class ReviewEntity {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

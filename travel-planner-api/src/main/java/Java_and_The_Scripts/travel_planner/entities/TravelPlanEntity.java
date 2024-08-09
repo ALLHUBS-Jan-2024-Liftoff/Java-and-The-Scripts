@@ -27,8 +27,10 @@ public class TravelPlanEntity {
     private String description;
 
     // ONE TRAVEL PLAN FOR MANY ACTIVITIES
-    @OneToMany(mappedBy = "description")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name= "travelPlanId", referencedColumnName = "id")
     private List<ActivityEntity> activities = new ArrayList<>();
+
 
     // NO ARGUMENT CONSTRUCTOR
     public TravelPlanEntity() {
