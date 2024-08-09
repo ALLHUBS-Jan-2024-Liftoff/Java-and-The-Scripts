@@ -14,5 +14,6 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
     @Query(value = "FROM ReviewEntity review WHERE review.activityEntity.activityId = :activityIdPassed")
     List<ReviewEntity> findByActivityId(@Param("activityIdPassed") Long activityId);
 
-
+    @Query(value = "FROM ReviewEntity review WHERE review.userEntity.id = :userIdPassed")
+    List<ReviewEntity> findByUserId(@Param("userIdPassed") Long userID);
 }
