@@ -4,22 +4,25 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const EditTravelPlan = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [travelPlan, setTravelPlan] = useState({
     destination: '',
     startDate: '',
     endDate: '',
     description: '',
-    activities: [],
+    activities: [''],
   });
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchTravelPlan = async () => {
       try {
         const response = await axios.get(`/api/travelplans/${id}`);
-        setTravelPlan(response.data);
+        const data = response.data; 
+        setTravelPlan(data);
       } catch (error) {
         console.error('Error fetching travel plan:', error);
+        alert("There was an error finding your travel plan.")
       }
     };
 
@@ -53,9 +56,13 @@ const EditTravelPlan = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/travelplans/${id}`, travelPlan);
+      await axios.put(`/api/travelplans/${id}`, travelPlan, {
+        headers: {
+          'Content-Type': 'application/json'
+          }
+      });
       alert("Travel plan updated successfully.");
-      navigate('/travel-plans');
+      navigate(`/travel-plans/${id}`);
     } catch (error) {
       console.error('Error updating travel plan:', error.response || error);
       alert("There was an error updating the travel plan.");
@@ -65,7 +72,7 @@ const EditTravelPlan = () => {
   return (
     <div>
       <h1>Edit Travel Plan</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="edit-travel-plan-form">
         <label>
           Destination:
           <input

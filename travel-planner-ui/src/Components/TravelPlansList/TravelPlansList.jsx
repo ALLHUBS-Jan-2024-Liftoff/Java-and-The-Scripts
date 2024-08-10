@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'; 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const TravelPlansList = () => {
     const [travelPlans, setTravelPlans] = useState([]);
@@ -37,15 +37,27 @@ const TravelPlansList = () => {
     return (
         <div>
             <h1>All Travel Plans</h1>
-            <ol>
+            {/* {travelPlans.length === 0 ? (
+                <p>No travel plans yet.</p>
+            ) : (
+            <ul className="travel-plans-list">
                 {travelPlans.map(plan => (
-                    <li key={plan.id}>
-                        <Link to={`/travel-plans/${plan.id}`}>{plan.destination}</Link>
-                        <button onClick={() => handleEdit(plan.id)}>Edit</button>
-                        <button onClick={() => handleDelete(plan.id)}>Delete</button>
+                    <li key={plan.id} className="travel-plan-item">
+                        <div className="travel-plan-details">
+                            <h2>{plan.destination}</h2>
+                            <p>Start Date: {plan.startDate}</p>
+                            <p>End Date: {plan.endDate}</p>
+                            <p>Description: {plan.description}</p>
+                            <p></p>
+                        </div>
+                        <div className="travel-plan-actions">
+                            <button onClick={() => handleEdit(plan.id)}>Edit</button>
+                            <button onClick={() => handleDelete(plan.id)}>Delete</button>
+                        </div>
                     </li>
                 ))}
-            </ol>
+            </ul>
+        )} */}
         </div>
     );
 };

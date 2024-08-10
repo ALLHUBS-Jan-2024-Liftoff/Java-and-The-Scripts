@@ -38,7 +38,11 @@ const TravelPlanForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/travelplans/new', travelPlan); // Updated endpoint
+      await axios.post('/api/travelplans/new', travelPlan, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
       alert("Travel plan created successfully.");
       // Reset form after successful submission
       setTravelPlan({
