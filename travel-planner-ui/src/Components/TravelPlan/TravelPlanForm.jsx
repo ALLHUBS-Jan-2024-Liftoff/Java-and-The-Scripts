@@ -38,7 +38,7 @@ const TravelPlanForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/travelplans/new', travelPlan, {
+      await axios.post('http://localhost:8080/api/travelplans/new', travelPlan, {
         headers: {
           'Content-Type': 'application/json'
         }
