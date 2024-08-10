@@ -10,19 +10,18 @@ const EditTravelPlan = () => {
     startDate: '',
     endDate: '',
     description: '',
-    activities: [''],
   });
 
 
   useEffect(() => {
     const fetchTravelPlan = async () => {
       try {
-        const response = await axios.get(`/api/travelplans/${id}`);
-        const data = response.data; 
-        setTravelPlan(data);
+          const response = await axios.get(`http://localhost:8080/api/travelplans/${id}`);
+          const data = response.data; 
+          setTravelPlan(data);
       } catch (error) {
-        console.error('Error fetching travel plan:', error);
-        alert("There was an error finding your travel plan.")
+          console.error('Error fetching travel plan:', error);
+          alert("There was an error finding your travel plan.")
       }
     };
 
@@ -31,41 +30,22 @@ const EditTravelPlan = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setTravelPlan({
-      ...travelPlan,
-      [name]: value,
-    });
-  };
-
-  const handleActivityChange = (index, event) => {
-    const newActivities = [...travelPlan.activities];
-    newActivities[index] = event.target.value;
-    setTravelPlan((prevPlan) => ({
-      ...prevPlan,
-      activities: newActivities,
-    }));
-  };
-
-  const addActivity = () => {
-    setTravelPlan((prevPlan) => ({
-      ...prevPlan,
-      activities: [...prevPlan.activities, ''],
-    }));
+    setTravelPlan({ ...travelPlan, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/travelplans/${id}`, travelPlan, {
+      await axios.put(`http://localhost:8080/api/travelplans/${id}`, travelPlan, {
         headers: {
           'Content-Type': 'application/json'
           }
       });
       alert("Travel plan updated successfully.");
-      navigate(`/travel-plans/${id}`);
+      navigate('/travel-plans/');
     } catch (error) {
-      console.error('Error updating travel plan:', error.response || error);
-      alert("There was an error updating the travel plan.");
+        console.error('Error updating travel plan:', error.response || error);
+        alert("There was an error updating the travel plan.");
     }
   };
 
@@ -112,17 +92,6 @@ const EditTravelPlan = () => {
             required
           />
         </label>
-        <label>Activities:</label>
-        {travelPlan.activities.map((activity, index) => (
-          <div key={index}>
-            <input
-              type="text"
-              value={activity}
-              onChange={(event) => handleActivityChange(index, event)}
-            />
-          </div>
-        ))}
-        <button type="button" onClick={addActivity}>Add Activity</button>
         <button type="submit">Submit</button>
       </form>
     </div>

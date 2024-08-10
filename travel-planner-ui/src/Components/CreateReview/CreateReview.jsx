@@ -10,7 +10,7 @@ const CreateReview = () => {
         comment: '',
     });
 
-    const navigate = useNavigate; 
+    const navigate = useNavigate(); 
 
     const handleChange = (e) => {
         const { name, value } = e.target; 
@@ -22,7 +22,7 @@ const CreateReview = () => {
     const handleSubmit =(e) => {
         e.preventDefault();
         try {
-            axios.post('/api/reviews/new', review)
+            axios.post('http://localhost:8080/api/reviews/new', review)
             alert("Review created.")
             navigate('/travel-plans');
         } catch(error) {
@@ -44,7 +44,7 @@ return (
             </div>
             <div>
                 <label>Comment</label> 
-                <textarea name="description" value={review.description} onChange={handleChange} />
+                <textarea name="comment" value={review.comment} onChange={handleChange} />
             </div>
             <button type="submit">Submit</button>
         </form>

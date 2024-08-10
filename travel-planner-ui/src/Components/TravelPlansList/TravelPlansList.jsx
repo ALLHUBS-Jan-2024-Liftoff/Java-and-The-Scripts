@@ -7,7 +7,7 @@ const TravelPlansList = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('/api/travelplans')
+        axios.get('http://localhost:8080/api/travelplans/')
             .then(response => {
                 console.log(response.data); // Check this to ensure it's an array
                 setTravelPlans(response.data);
@@ -22,7 +22,7 @@ const TravelPlansList = () => {
     };
 
     const handleDelete = (id) => {
-        axios.delete(`/api/travelplans/${id}`)
+        axios.delete(`http://localhost:8080/api/travelplans/${id}`)
             .then(() => {
                 // Remove the deleted travel plan from the state
                 setTravelPlans(travelPlans.filter(plan => plan.id !== id));
@@ -37,7 +37,20 @@ const TravelPlansList = () => {
     return (
         <div>
             <h1>All Travel Plans</h1>
-                <p>No travel plans yet.</p> 
+                {travelPlans.length > 0 ? (
+                    <ul>
+                        {travelPlans.map(plan => (
+                        <li key={plan.id}>
+                            <h3>{plan.destination}</h3>
+                            <p>{plan.description}</p>
+                            <button onClick={() => handleEdit(plan.id)}>Edit</button>
+                            <button onClick={() => handleDelete(plan.id)}>Delete</button>
+                        </li>
+                    ))}
+                    </ul>
+                ) : (
+                    <p>No travel plans yet.</p> 
+                )}
         </div> 
     );
 };

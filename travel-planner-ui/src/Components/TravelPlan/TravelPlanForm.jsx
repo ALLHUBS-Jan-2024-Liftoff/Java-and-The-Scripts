@@ -8,7 +8,6 @@ const TravelPlanForm = () => {
     startDate: '',
     endDate: '',
     description: '',
-    activities: [],
   });
 
   const handleChange = (e) => {
@@ -17,22 +16,6 @@ const TravelPlanForm = () => {
       ...travelPlan, 
       [name]: value 
     });
-  };
-
-  const handleActivityChange = (index, event) => {
-    const newActivities = [...travelPlan.activities];
-    newActivities[index] = event.target.value;
-    setTravelPlan((prevPlan) => ({
-      ...prevPlan,
-      activities: newActivities,
-    }));
-  };
-
-  const addActivity = () => {
-    setTravelPlan((prevPlan) => ({
-      ...prevPlan,
-      activities: [...prevPlan.activities, ''],
-    }));
   };
 
   const handleSubmit = async (e) => {
@@ -50,7 +33,6 @@ const TravelPlanForm = () => {
         startDate: '',
         endDate: '',
         description: '',
-        activities: [],
       });
     } catch (error) {
       console.error('There was an error creating the travel plan!', error);
@@ -58,7 +40,7 @@ const TravelPlanForm = () => {
     }
   };
 
-  return (
+return (
     <div>
       <h1>Create Travel Plan</h1>
       <form onSubmit={handleSubmit} className="travel-plan-form">
@@ -102,17 +84,6 @@ const TravelPlanForm = () => {
             required
           />
         </label>
-        <label>Activities:</label>
-        {travelPlan.activities.map((activity, index) => (
-          <div key={index}>
-            <input
-              type="text"
-              value={activity}
-              onChange={(event) => handleActivityChange(index, event)}
-            />
-          </div>
-        ))}
-        <button type="button" onClick={addActivity}>Add Activity</button>
         <button type="submit">Submit</button>
       </form>
     </div>
