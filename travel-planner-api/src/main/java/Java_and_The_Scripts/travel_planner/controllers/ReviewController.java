@@ -1,6 +1,8 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
+import Java_and_The_Scripts.travel_planner.entities.EntityMapper;
 import Java_and_The_Scripts.travel_planner.entities.ReviewEntity;
+import Java_and_The_Scripts.travel_planner.models.Review;
 import Java_and_The_Scripts.travel_planner.repositories.ActivityRepository;
 import Java_and_The_Scripts.travel_planner.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,8 @@ public class ReviewController {
 
     // CREATE A NEW REVIEW
     @PostMapping("/new")
-    public ReviewEntity createReview(@RequestBody ReviewEntity reviewEntity) {
+    public ReviewEntity createReview(@RequestBody Review review) {
+        ReviewEntity reviewEntity = EntityMapper.mapper.reviewToReviewEntity(review);
         return reviewRepository.save(reviewEntity);
     }
 
@@ -34,9 +37,9 @@ public class ReviewController {
 
     // UPDATE EXISTING REVIEW
     @PutMapping("/{id}")
-    public String updateReview(@PathVariable Long id, @RequestBody ReviewEntity reviewEntity) {
+    public String updateReview(@PathVariable Long id, @RequestBody Review review) {
         if (reviewRepository.existsById(id)) {
-            reviewEntity.setId(id);
+            ReviewEntity reviewEntity = EntityMapper.mapper.reviewToReviewEntity(review);
             reviewRepository.save(reviewEntity);
             return "Review updated successfully.";
         } else {

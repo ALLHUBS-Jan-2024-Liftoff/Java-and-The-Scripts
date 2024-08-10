@@ -1,6 +1,7 @@
 package Java_and_The_Scripts.travel_planner.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -12,6 +13,11 @@ public class UserEntity {
     private Long id;
 
     @NotNull
+    @Email
+    @Column(name = "email")
+    private String email;
+
+    @NotNull
     @Column(name = "first_name")
     private String firstName;
 
@@ -19,13 +25,31 @@ public class UserEntity {
     @Column(name = "last_name")
     private String lastName;
 
+    @NotNull
+    @Column(name = "password")
+    private String password;
+
     public UserEntity(){}
 
-    public UserEntity(Long id, String firstName, String lastName) {
+    public UserEntity(Long id, String email, String firstName, String lastName, String password) {
         this.id = id;
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
     public String getFirstName() {
         return firstName;
@@ -43,12 +67,7 @@ public class UserEntity {
         this.lastName = lastName;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public String getPassword() { return password; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    public void setPassword(String password) { this.password = password; }
 }
