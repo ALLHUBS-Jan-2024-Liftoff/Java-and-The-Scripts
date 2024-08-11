@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} /> 
           <Route path="/create-travel-plan" element={<TravelPlanForm />} />
-          <Route path="/travel-plans/:id" element={<TravelPlanView />} />
+          <Route path="/travel-plan-view/:id" element={<TravelPlanView />} />
           <Route path="/edit-travel-plan/:id" element={<EditTravelPlan />} />
           <Route path="/travel-plans" element={<TravelPlansList />} />
           <Route path="/create-review" element={<CreateReview />} />

@@ -17,6 +17,10 @@ const TravelPlansList = () => {
             });
     }, []);
 
+    const handleView = (id) => {
+        navigate(`/travel-plan-view/${id}`)
+    };
+
     const handleEdit = (id) => {
         navigate(`/edit-travel-plan/${id}`);
     };
@@ -43,6 +47,7 @@ const TravelPlansList = () => {
                         <li key={plan.id}>
                             <h3>{plan.destination}</h3>
                             <p>{plan.description}</p>
+                            <button onClick={() => handleView(plan.id)}>View</button>
                             <button onClick={() => handleEdit(plan.id)}>Edit</button>
                             <button onClick={() => handleDelete(plan.id)}>Delete</button>
                         </li>

@@ -4,11 +4,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 const TravelPlanView = () => {
     const { id } = useParams();
-    const [travelPlan, setTravelPlan] = useState(null); 
-    const navigate = useNavigate; 
+    const [travelPlan, setTravelPlan] = useState({}); 
+    const navigate = useNavigate(); 
 
     useEffect(() => {
-        axios.get(`api/travelplans/${id}`)
+        axios.get(`http://localhost:8080/api/travelplans/${id}`)
             .then(response => {
                 setTravelPlan(response.data);
             })
