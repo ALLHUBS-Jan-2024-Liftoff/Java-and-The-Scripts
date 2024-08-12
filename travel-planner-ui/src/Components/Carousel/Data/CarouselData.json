@@ -1,0 +1,24 @@
+{
+    "slides": [
+        {
+            "src": "https://images.pexels.com/photos/1051075/pexels-photo-1051075.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "alt": "Map of United States"
+        },
+        {
+            "src": "https://images.pexels.com/photos/586687/pexels-photo-586687.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "alt": "Ride in Gondola"
+        },
+        {
+            "src": "https://images.pexels.com/photos/2114206/pexels-photo-2114206.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "alt": "Hiking"
+        },
+        {
+            "src": "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=6000",
+            "alt": "Mountains"
+        },
+        {
+            "src": "https://images.pexels.com/photos/731217/pexels-photo-731217.jpeg?auto=compress&cs=tinysrgb&w=600",
+            "alt": "View Out Of Airplane"
+        }
+    ]
+}

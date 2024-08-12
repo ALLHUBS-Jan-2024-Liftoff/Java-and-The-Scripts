@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/travelplans")
+@CrossOrigin(origins = "http://localhost:5173")
 public class TravelPlanController {
 
     private static final Logger log = LoggerFactory.getLogger(TravelPlanController.class);
