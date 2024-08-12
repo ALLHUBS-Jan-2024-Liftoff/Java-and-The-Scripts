@@ -10,7 +10,7 @@ const Home = () => {
         <div>
             <h1>Welcome To Your Home Page</h1>
             <p>Time to plan your next adventure!</p>
-            <Carousel data={slides}/> 
+            <center><Carousel data={slides} /></center>
         </div>
     );
 };

@@ -1,9 +1,10 @@
 .carousel {
-    position: relative; 
+    position: center; 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 400px;
+    width: 400px;
 }
 
 .slide {
