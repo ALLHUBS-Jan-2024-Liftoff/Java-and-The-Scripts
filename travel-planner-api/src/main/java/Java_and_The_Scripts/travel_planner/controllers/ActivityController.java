@@ -25,7 +25,7 @@ public class ActivityController {
 
     // Create a new activity
     @PostMapping("/new")
-    public ActivityEntity createNewActivity(@RequestBody Activity activity){
+    public ActivityEntity createActivity(@RequestBody Activity activity){
         ActivityEntity activityEntity = EntityMapper.mapper.activityToActivityEntity(activity);
         return activityRepository.save(activityEntity);
     }
@@ -45,7 +45,7 @@ public class ActivityController {
 
             activityRepository.save(activityEntity);
 
-            return "Activity deleted successfully.";
+            return "Activity updated successfully.";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Activity not found");
         }
