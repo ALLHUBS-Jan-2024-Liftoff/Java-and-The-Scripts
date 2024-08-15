@@ -45,7 +45,7 @@ public class ActivityController {
 
             activityRepository.save(activityEntity);
 
-            return "Activity updated successfully.";
+            return "Activity updated successfully!";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Activity not found");
         }
@@ -56,7 +56,7 @@ public class ActivityController {
     public String deleteActivity(@PathVariable Long id) {
         if (activityRepository.existsById(id)) {
             travelPlanRepository.deleteById(id);
-            return "Activity deleted successfully.";
+            return "Activity deleted successfully!";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Activity does not exist");
         }

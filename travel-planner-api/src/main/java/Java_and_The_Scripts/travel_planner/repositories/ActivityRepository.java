@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface ActivityRepository extends JpaRepository<ActivityEntity,Long> {
     @Query(value = "FROM ActivityEntity activityEntity WHERE activityEntity.activityId = :activityIdPassed")
-    List<ActivityEntity> findByActivityId(@Param("activityIdPassed") long activityId);
+    List<ActivityEntity> findByActivityId(@Param("activityIdPassed") Long activityId);
 }
