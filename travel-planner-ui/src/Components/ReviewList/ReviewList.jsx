@@ -5,7 +5,7 @@ const ReviewList = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => { 
-        axios.get('/api/reviews')
+        axios.get('http://localhost:8080/api/reviews')
             .then(response => {
                 setReviews(response.data)
             })
@@ -19,21 +19,20 @@ const ReviewList = () => {
 return (
     <div>
         <h1>All Reviews</h1>
-        {/* {reviews.length === 0 ? ( 
-            <p>No reviews yet.</p>
-        ) : (
-        <ul>
-            {reviews.map(review => (
-                <li key={review.id} className="review-item">
-                    <p>{review.rating}</p>
-                    <p>{review.description}</p>
-                    <Link to={`/reviews/${review.id}`}>View Details</Link>
-                </li> 
+        {reviews.length === 0 ? (
+                <p>No reviews yet.</p>
+        ) : ( 
+            <ul>
+                {reviews.map(review => (
+                    <li key={review.id}>
+                        <p>{review.comment}</p>
+                        <p>{review.rating}</p>
+                    </li>
                 ))}
-        </ul>
-        )} */}
+            </ul>
+        )}
     </div>
-);
+    );
 }; 
 
 export default ReviewList;
