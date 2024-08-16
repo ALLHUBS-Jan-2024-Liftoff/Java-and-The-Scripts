@@ -12,6 +12,7 @@ const Header = () => {
           <Navbar.Brand as={Link} to="/"><strong>Travel Planner</strong></Navbar.Brand>
           <Nav className="ml-auto">
             <Nav.Link as={Link} to="/" className="nav-link">Home</Nav.Link>
+            <Nav.Link as={Link} to="/login" className="nav-link">Login</Nav.Link>
             <Nav.Link as={Link} to="/profile" className="nav-link">Profile</Nav.Link>
             <Nav.Link as={Link} to="/create-travel-plan" className="nav-link">Create Travel Plan</Nav.Link>
             <Nav.Link as={Link} to="/travel-plans" className="nav-link">Travel Plans</Nav.Link>
