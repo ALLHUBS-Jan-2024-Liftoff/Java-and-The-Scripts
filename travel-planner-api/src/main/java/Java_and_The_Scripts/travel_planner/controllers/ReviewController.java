@@ -10,10 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reviews")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ReviewController {
 
     @Autowired
@@ -27,6 +29,11 @@ public class ReviewController {
     public ReviewEntity createReview(@RequestBody Review review) {
         ReviewEntity reviewEntity = EntityMapper.mapper.reviewToReviewEntity(review);
         return reviewRepository.save(reviewEntity);
+    }
+    // GET ALL REVIEWS
+    @GetMapping
+    public List<ReviewEntity> getAllReviews() {
+        return reviewRepository.findAll();
     }
 
     // GET REVIEW BY ID

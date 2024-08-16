@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const UserSearch = () => {
+const UserSearch = ({ onUserFound }) => {
     const [email, setEmail] = useState(); 
 
     const handleSearch = async () => {
@@ -10,6 +10,7 @@ const UserSearch = () => {
             onUserFound(response.data);
         } catch (error) {
             console.error("Error finding user.", error)
+            alert("User not found.")
         } 
     };
 
