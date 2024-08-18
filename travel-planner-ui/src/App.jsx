@@ -11,6 +11,7 @@ import TravelPlanView from './Components/TravelPlanView/TravelPlanView';
 import CreateReview from './Components/CreateReview/CreateReview';
 import ReviewList from './Components/ReviewList/ReviewList';
 import User from './Components/User/User';
+import EditReview from './Components/EditReview/EditReview';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/travel-plans" element={<TravelPlansList />} />
           <Route path="/create-review" element={<CreateReview />} />
           <Route path="/reviews" element={<ReviewList />} /> 
+          <Route path="/reviews/edit-review/:id" element={<EditReview />} /> 
           <Route path="/user" element={<User />} />
         </Routes>
       </main>
