@@ -49,6 +49,23 @@ const EditTravelPlan = () => {
     }
   };
 
+  /* const handleSubmitActivity = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`http://localhost:8080/api/actiivties/new`, travelPlan, {
+        headers: {
+          'Content-Type': 'application/json'
+          }
+      });
+      alert("Travel plan updated successfully.");
+      navigate('/travel-plans/');
+    } catch (error) {
+        console.error('Error updating travel plan:', error.response || error);
+        alert("There was an error updating the travel plan.");
+    }
+  };
+  */
+
   return (
     <div>
       <h1>Edit Travel Plan</h1>
@@ -93,6 +110,9 @@ const EditTravelPlan = () => {
           />
         </label>
         <button type="submit">Submit</button>
+      </form>
+      <form onSubmit={handleSubmit} className="activity-form">
+          <button>Add Activity</button>
       </form>
     </div>
   );
