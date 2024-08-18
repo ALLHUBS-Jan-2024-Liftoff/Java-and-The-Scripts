@@ -26,33 +26,36 @@ const TravelPlansList = () => {
     };
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:8080/api/travelplans/${id}`)
-            .then(() => {
-                // Remove the deleted travel plan from the state
-                setTravelPlans(travelPlans.filter(plan => plan.id !== id));
-                alert('Travel plan deleted successfully.');
-            })
-            .catch(error => {
-                console.error('Error deleting travel plan:', error);
-                alert('There was an issue deleting the travel plan.');
-            });
+        const confirmed = window.confirm("Are you sure you want to delete this travel plan?")
+        if (confirmed) {
+            axios.delete(`http://localhost:8080/api/travelplans/${id}`)
+                .then(() => {
+                    // Remove the deleted travel plan from the state
+                    setTravelPlans(travelPlans.filter(plan => plan.id !== id));
+                    alert('Travel plan deleted successfully.');
+                })
+                .catch(error => {
+                    console.error('Error deleting travel plan:', error);
+                    alert('There was an issue deleting the travel plan.');
+                });
+        }
     };
 
     return (
         <div>
             <h1>All Travel Plans</h1>
                 {travelPlans.length > 0 ? (
-                    <ul>
+                    <ol>
                         {travelPlans.map(plan => (
                         <li key={plan.id}>
                             <h3>{plan.destination}</h3>
                             <p>{plan.description}</p>
-                            <button onClick={() => handleView(plan.id)}>View</button>
-                            <button onClick={() => handleEdit(plan.id)}>Edit</button>
-                            <button onClick={() => handleDelete(plan.id)}>Delete</button>
+                            <button type="button" class="btn btn-primary" onClick={() => handleView(plan.id)}>View</button>
+                            <button type="button" class="btn btn-warning" onClick={() => handleEdit(plan.id)}>Edit</button>
+                            <button type="button" class="btn btn-danger" onClick={() => handleDelete(plan.id)}>Delete</button>
                         </li>
                     ))}
-                    </ul>
+                    </ol>
                 ) : (
                     <p>No travel plans yet.</p> 
                 )}

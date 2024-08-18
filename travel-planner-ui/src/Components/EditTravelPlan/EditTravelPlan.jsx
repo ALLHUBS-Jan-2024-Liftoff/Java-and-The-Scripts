@@ -53,47 +53,17 @@ const EditTravelPlan = () => {
     <div>
       <h1>Edit Travel Plan</h1>
       <form onSubmit={handleSubmit} className="edit-travel-plan-form">
-        <label>
-          Destination:
-          <input
-            type="text"
-            name="destination"
-            value={travelPlan.destination}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Start Date:
-          <input
-            type="date"
-            name="startDate"
-            value={travelPlan.startDate}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          End Date:
-          <input
-            type="date"
-            name="endDate"
-            value={travelPlan.endDate}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Description:
-          <textarea
-            name="description"
-            value={travelPlan.description}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <button type="submit">Submit</button>
+        <label for="destination" class="form-label">Destination: </label>
+        <input type="text" class="form-control" id="destination" placeholder="Enter Destination" name="destination" value={travelPlan.destination} onChange={handleChange} required />
+        <label for="startDate" class="form-label">Start Date: </label>
+        <input type="date" class="form-control" name="startDate" value={travelPlan.startDate} onChange={handleChange} required />
+        <label for="endDate" class="form-label">End Date: </label>
+        <input type="date" class="form-control" name="endDate" value={travelPlan.endDate} onChange={handleChange} required />
+        <label for="description" class="form-label">Description: </label>
+        <input type="textarea" class="form-control" placeholder="Enter Description" name="description" value={travelPlan.description} onChange={handleChange} required />
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+        <button type="button" class="btn btn-secondary" onClick={() => navigate('/travel-plans')}>Back</button>
     </div>
   );
 };

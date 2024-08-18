@@ -8,9 +8,9 @@ const UserProfile = ({ user }) => {
     return (
         <div>
             <h2>User Profile</h2>
-            <p>First Name: {user.firstName}</p> 
-            <p>Last Name: {user.lastName}</p>
-            <p>Email: {user.email}</p> 
+            <p><strong>First Name: </strong>{user.firstName}</p> 
+            <p><strong>Last Name: </strong>{user.lastName}</p>
+            <p><strong>Email: </strong>{user.email}</p> 
         </div>
     );
 };
