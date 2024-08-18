@@ -6,12 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query(value = "FROM UserEntity user WHERE user.email = :emailPassed")
     UserEntity findByEmail(@Param("emailPassed") String email);
 
     boolean existsUserByEmail(String email);
+
 }

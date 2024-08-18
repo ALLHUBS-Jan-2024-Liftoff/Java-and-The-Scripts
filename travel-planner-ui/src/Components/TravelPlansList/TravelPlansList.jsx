@@ -50,6 +50,7 @@ const TravelPlansList = () => {
                             <button onClick={() => handleView(plan.id)}>View</button>
                             <button onClick={() => handleEdit(plan.id)}>Edit</button>
                             <button onClick={() => handleDelete(plan.id)}>Delete</button>
+                            <button onClick={() => handleAddActivity(plan)}>Add Activity</button>
                         </li>
                     ))}
                     </ul>

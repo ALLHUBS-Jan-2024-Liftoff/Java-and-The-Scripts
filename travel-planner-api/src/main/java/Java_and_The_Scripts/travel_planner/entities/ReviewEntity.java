@@ -76,4 +76,15 @@ public class ReviewEntity {
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
     }
+
+    @Override
+    public String toString() {
+        return "ReviewEntity{" +
+                "id=" + id +
+                ", activityEntity=" + activityEntity +
+                ", userEntity=" + userEntity +
+                ", reviewDescription='" + reviewDescription + '\'' +
+                ", rating=" + rating +
+                '}';
+    }
 }

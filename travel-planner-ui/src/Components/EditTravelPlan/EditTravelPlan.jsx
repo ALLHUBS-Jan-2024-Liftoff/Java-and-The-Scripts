@@ -111,9 +111,7 @@ const EditTravelPlan = () => {
         </label>
         <button type="submit">Submit</button>
       </form>
-      <form onSubmit={handleSubmit} className="activity-form">
-          <button>Add Activity</button>
-      </form>
+        <button onClick={() => navigate('/travel-plans')}>Back to Travel Plans List</button>
     </div>
   );
 };

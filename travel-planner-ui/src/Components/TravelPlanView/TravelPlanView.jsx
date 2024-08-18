@@ -2,6 +2,7 @@ import React, {useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
+
 const TravelPlanView = () => {
     const { id } = useParams();
     const [travelPlan, setTravelPlan] = useState({}); 
@@ -15,19 +16,20 @@ const TravelPlanView = () => {
                     throw new Error("Response from API Error")
                     }
                 return response.json()
+                })
             .then(data => {
                 setTravelPlan(data);
             })
             .catch(error => {
                 console.error("Error grabbing travel plan details.", error)
-            });
+            })
             .finally(() => {
                 setLoading(false);
             })
-    }, [id]);
+    },      [id]);
 
-if(loading) {
-    return <div>Loading...</div>
+    if(loading) {
+         return <div>Loading...</div>
     }
 
 return (
@@ -43,7 +45,7 @@ return (
                 {travelPlan.activities.map(activity => (
                     <li key={activity.activityId}>
                         <p><strong>Activity Description:</strong> {activity.description}</p>
-                        <p><strong>Activity Day:</storage> {activity.day}</p>
+                        <p><strong>Activity Day:</strong> {activity.day}</p>
                         <button onClick={() => handleView(activity.activityId)}>View</button>
                         <button onClick={() => handleEdit(activity.activityId)}>Edit</button>
                         <button onClick={() => handleDelete(activity.activityId)}>Delete</button>
@@ -54,7 +56,6 @@ return (
                     <p>No Activities yet.</p>
                 )}
                 <button onClick={() => navigate('/travel-plans')}>Back to Travel Plans List</button>
-                );
         </div>
     );
 };
