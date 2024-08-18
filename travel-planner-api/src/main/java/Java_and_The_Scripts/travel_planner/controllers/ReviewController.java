@@ -10,10 +10,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reviews")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ReviewController {
 
     @Autowired
@@ -28,6 +30,11 @@ public class ReviewController {
         ReviewEntity reviewEntity = EntityMapper.mapper.reviewToReviewEntity(review);
         return reviewRepository.save(reviewEntity);
     }
+    // GET ALL REVIEWS
+    @GetMapping
+    public List<ReviewEntity> getAllReviews() {
+        return reviewRepository.findAll();
+    }
 
     // GET REVIEW BY ID
     @GetMapping("/{id}")
@@ -35,12 +42,16 @@ public class ReviewController {
         return reviewRepository.findById(id);
     }
 
-    // UPDATE EXISTING REVIEW
+    // UPDATE EXISTING REVIEW//
     @PutMapping("/{id}")
     public String updateReview(@PathVariable Long id, @RequestBody Review review) {
-        if (reviewRepository.existsById(id)) {
-            ReviewEntity reviewEntity = EntityMapper.mapper.reviewToReviewEntity(review);
-            reviewRepository.save(reviewEntity);
+        Optional<ReviewEntity> existingReviewOptional = reviewRepository.findById(id);
+
+        if (existingReviewOptional.isPresent()) {
+            ReviewEntity existingReview = existingReviewOptional.get();
+            ReviewEntity updatedReview = EntityMapper.mapper.reviewToReviewEntity(review);
+            updatedReview.setId(existingReview.getId());
+            reviewRepository.save(updatedReview);
             return "Review updated successfully.";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Review not found.");
