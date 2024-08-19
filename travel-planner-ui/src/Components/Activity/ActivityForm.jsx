@@ -72,30 +72,14 @@ const ActivityForm = () => {
     };
 
     return (
-        <div>
+        <div class="mb-3">
             <h1>Create Activity</h1>
             <form onSubmit={handleSubmit} className="activity-form">
-                <label>
-                    Day:
-                    <input
-                        type="text"
-                        id="day"
-                        name="day"
-                        value={activity.day}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <label>
-                    Description:
-                    <textarea
-                        name="description"
-                        value={activity.description}
-                        onChange={handleChange}
-                        required
-                    />
-                </label>
-                <button type="submit">Submit</button>
+                <label htmlFor="day" class="form-label">Day: </label>
+                <input type="text" class="form-control" id="day" name="day" value={activity.day} onChange={handleChange} required />
+                <label htmlFor="description" class="form-label">Description: </label>
+                <input type="textarea" class="form-control" name="description" value={activity.description} onChange={handleChange} required />
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     );
