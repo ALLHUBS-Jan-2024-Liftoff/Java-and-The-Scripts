@@ -70,7 +70,7 @@ const handleAddActivity = (id) => {
                             <button type="button" class="btn btn-primary" onClick={() => handleView(plan.id)}>View</button>
                             <button type="button" class="btn btn-warning" onClick={() => handleEdit(plan.id)}>Edit</button>
                             <button type="button" class="btn btn-danger" onClick={() => handleDelete(plan.id)}>Delete</button>
-                            <button onClick={() => handleAddActivity(plan.id)}>Add Activity</button>
+                            <button type="button" class="btn btn-info" onClick={() => handleAddActivity(plan.id)}>Add Activity</button>
                         </li>
                     ))}
                     </ol>
