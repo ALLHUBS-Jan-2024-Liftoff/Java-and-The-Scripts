@@ -1,31 +1,26 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
-const Login = () => {
-    const [login, setLogin] = useState({
-        email: '',
-        password: ''
-    });
+import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+export const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+    const { login } = useAuth();
 
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target; 
-        setReview({...login, [name]: value })
-    };
-
-    const handleSubmit =(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            axios.post('http://localhost:8080/api/login', login);
-            navigate('/login');
-        } catch(error) {
-            console.error("There was an error logging in. Please try again.", error);
-            alert("There was an error logging in.");
+            await login(email, password);
+            navigate("/profile");
+        } catch (error) {
+            setError("Login failed. Please check your credentials.");
         }
-    };
+    }
 
     return (
         <div>
@@ -33,16 +28,17 @@ const Login = () => {
             <form className="login-form" onSubmit={handleSubmit}>
                 <div className="login-info">
                     <label>Email</label>
-                    <input type="text" name="email" value={login.email} onChange={handleChange} />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
 
                     <label>Password</label>
-                    <input type="text" name="password" value={login.password} onChange={handleChange} />
-                </div>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
 
+                    {error && <div className="alert alert-danger">{error}</div>}
+                </div>
                 <button type="submit">Login</button>
             </form>
         </div>
-    );
+    )
 }
 
 export default Login;
