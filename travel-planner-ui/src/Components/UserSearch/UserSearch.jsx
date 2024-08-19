@@ -16,13 +16,8 @@ const UserSearch = ({ onUserFound }) => {
 
     return (
         <div>
-            <input 
-                type="email"
-                placeholder="Enter user's email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <button onClick={handleSearch}>Search</button>
+            <input type="email"placeholder="Enter user's email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <button type="button" class="btn btn-primary" onClick={handleSearch}>Search</button>
         </div> 
     );
 

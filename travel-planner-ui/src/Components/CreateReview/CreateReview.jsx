@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const CreateReview = () => {
     const [review, setReview] = useState({
         rating: '',
-        comment: '',
+        reviewDescription: '',
     });
 
     const navigate = useNavigate(); 
@@ -33,22 +33,16 @@ const CreateReview = () => {
     }
 
 return (
-    <div>
+    <div class="mb-3">
         <h1>Create Review</h1>
         <form onSubmit={handleSubmit} className="create-review-form">
-            <div>
-                <p>Enter a number between 1 and 5 (1 being the worst, 5 the best).</p>
-                <label>Rating</label>
-                <input type="number" name="rating" value={review.rating} onChange={handleChange} min="1" max="5"/>    
-            </div>
-            <div>
-                <label>Comment</label> 
-                <textarea name="comment" value={review.comment} onChange={handleChange} />
-            </div>
-            <button type="submit">Submit</button>
+            <label htmlFor="rating" class="form-label">Rating- Enter a number between 1 and 5 (1 being the worst, 5 the best).</label>
+            <input type="number" class="form-control" name="rating" value={review.rating} onChange={handleChange} min="1" max="5"/>    
+            <label htmlFor="reviewDescription" class="form-label">Review Description</label> 
+            <input type="text" class="form-control" placeholder="Enter a comment" name="reviewDescription" value={review.reviewDescription} onChange={handleChange} />
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-);
-};
+)};
 
 export default CreateReview; 

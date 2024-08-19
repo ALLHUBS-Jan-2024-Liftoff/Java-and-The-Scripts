@@ -35,12 +35,12 @@ const TravelPlanView = () => {
 return (
     <div>
         <h1>Travel Plan Details</h1>
-        <p><strong>Travel Plan Destination</strong> {travelPlan.destination}</p>
+        <p>{travelPlan.destination}</p>
         <p><strong>Start Date: </strong>{travelPlan.startDate}</p>
-        <p><strong>End Date:</strong> {travelPlan.endDate}</p>
-        <p><strong>Description:</strong> {travelPlan.description}</p>
-        <h5><u>Activities:</u></h5>
-        {travelPlan.activities.length > 0 ? (
+        <p><strong>End Date: </strong>{travelPlan.endDate}</p>
+        <p><strong>Description: </strong>{travelPlan.description}</p>
+        <p><strong>Activities</strong></p>
+               {travelPlan.activities.length > 0 ? (
             <ol>
                 {travelPlan.activities.map(activity => (
                     <li key={activity.activityId}>
@@ -52,7 +52,7 @@ return (
                 ) : (
                     <p>No Activities yet.</p>
                 )}
-                <button onClick={() => navigate('/travel-plans')}>Back to Travel Plans List</button>
+        <button type="button" class="btn btn-primary" onClick={() => navigate('/travel-plans')}>Back to Travel Plans List</button>
         </div>
     );
 };
