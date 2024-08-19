@@ -19,12 +19,16 @@ const ReviewList = () => {
 }, []); 
 
     const handleDelete = async (id) => {
-        try {
-            await axios.delete(`http://localhost:8080/api/reviews/${id}`);
-            setReviews(reviews.filter(review => review.id !== id));
-        } catch (error) {
-            console.error("Error deleting review", error)
-            alert("Error deleting review.");
+        const confirmed = window.confirm("Are you sure you want to delete this review?")
+        if (confirmed) {
+            try {
+                await axios.delete(`http://localhost:8080/api/reviews/${id}`);
+                setReviews(reviews.filter(review => review.id !== id));
+                alert("Review deleted.")
+            } catch (error) {
+                console.error("Error deleting review", error)
+                alert("Error deleting review.");
+            }
         }
     }; 
 
@@ -38,16 +42,16 @@ return (
         {reviews.length === 0 ? (
                 <p>No reviews yet.</p>
         ) : ( 
-            <ul>
+            <ol>
                 {reviews.map(review => (
                     <li key={review.id}>
-                        <p>{review.comment}</p>
+                        <p>{review.reviewDescription}</p>
                         <p>{review.rating}</p>
-                        <button onClick={() => handleEdit(review.id)}>Edit</button>
-                        <button onClick={() => handleDelete(review.id)}>Delete</button>
+                        <button type="button" class="btn btn-warning" onClick={() => handleEdit(review.id)}>Edit</button>
+                        <button type="button" class="btn btn-danger" onClick={() => handleDelete(review.id)}>Delete</button>
                     </li>
                 ))}
-            </ul>
+            </ol>
         )}
     </div>
     );

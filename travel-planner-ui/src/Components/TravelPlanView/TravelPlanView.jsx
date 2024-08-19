@@ -21,11 +21,11 @@ return (
     <div>
         <h1>Travel Plan Details</h1>
         <p>{travelPlan.destination}</p>
-        <p>Start Date: {travelPlan.startDate}</p>
-        <p>End Date: {travelPlan.endDate}</p>
-        <p>Description: {travelPlan.description}</p>
-        <p>Activities</p>
-        <button onClick={() => navigate('/travel-plans')}>Back to Travel Plans List</button>
+        <p><strong>Start Date: </strong>{travelPlan.startDate}</p>
+        <p><strong>End Date: </strong>{travelPlan.endDate}</p>
+        <p><strong>Description: </strong>{travelPlan.description}</p>
+        <p><strong>Activities</strong></p>
+        <button type="button" class="btn btn-primary" onClick={() => navigate('/travel-plans')}>Back to Travel Plans List</button>
         </div>
     );
 };
