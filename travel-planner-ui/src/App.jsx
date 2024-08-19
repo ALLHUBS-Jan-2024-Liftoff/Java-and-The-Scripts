@@ -11,11 +11,12 @@ import EditTravelPlan from './Components/EditTravelPlan/EditTravelPlan';
 import TravelPlanView from './Components/TravelPlanView/TravelPlanView';
 import CreateReview from './Components/CreateReview/CreateReview';
 import ReviewList from './Components/ReviewList/ReviewList';
+import { AuthProvider } from './context/AuthContext';
 
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Header /> 
       <main>
         <Routes>
@@ -31,7 +32,7 @@ function App() {
           <Route path="/reviews" element={<ReviewList />} /> 
         </Routes>
       </main>
-    </>
+    </AuthProvider>
   );
 }
 
