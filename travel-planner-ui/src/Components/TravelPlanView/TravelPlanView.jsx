@@ -46,9 +46,6 @@ return (
                     <li key={activity.activityId}>
                         <p><strong>Activity Description:</strong> {activity.description}</p>
                         <p><strong>Activity Day:</strong> {activity.day}</p>
-                        <button onClick={() => handleView(activity.activityId)}>View</button>
-                        <button onClick={() => handleEdit(activity.activityId)}>Edit</button>
-                        <button onClick={() => handleDelete(activity.activityId)}>Delete</button>
                     </li>
                 ))}
                 </ol>

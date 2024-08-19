@@ -5,15 +5,25 @@ public class Activity {
     private String description;
     private int day;
     private User user;
+    private TravelPlan travelPlan;
 
     public Activity() {
     }
 
-    public Activity(long activityId, String description, int day, User user) {
+    public Activity(long activityId, String description, int day, User user, TravelPlan travelPlan) {
         this.activityId = activityId;
         this.description = description;
         this.day = day;
         this.user = user;
+        this.travelPlan = travelPlan;
+    }
+
+    public TravelPlan getTravelPlan(){
+        return travelPlan;
+    }
+
+    public void setTravelPlan(TravelPlan travelPlan){
+        this.travelPlan = travelPlan;
     }
 
     public long getActivityId() {

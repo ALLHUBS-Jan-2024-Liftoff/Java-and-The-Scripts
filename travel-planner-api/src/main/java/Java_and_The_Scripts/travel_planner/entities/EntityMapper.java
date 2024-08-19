@@ -20,7 +20,9 @@ public interface EntityMapper {
     UserEntity userToUserEntity(User user);
     User userEntityToUser(UserEntity userEntity);
 
+    @Mapping(source = "travelPlan", target = "travelPlanEntity")
     ActivityEntity activityToActivityEntity(Activity activity);
+    @Mapping(source = "travelPlanEntity", target = "travelPlan")
     Activity activityEntityToActivity(ActivityEntity activityEntity);
 
     @Mapping(source = "user", target = "userId")

@@ -5,17 +5,34 @@ import { useNavigate } from 'react-router-dom';
 const TravelPlansList = () => {
     const [travelPlans, setTravelPlans] = useState([]);
     const navigate = useNavigate();
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        axios.get('http://localhost:8080/api/travelplans/')
+useEffect(() => {
+        fetch('http://localhost:8080/api/travelplans/')
             .then(response => {
-                console.log(response.data); // Check this to ensure it's an array
-                setTravelPlans(response.data);
+                if(!response.ok) {
+                    throw new Error("Response from API Error")
+                }
+                return response.json()
+            })
+            .then(data => {
+                setTravelPlans(data);
             })
             .catch(error => {
                 console.error('Error fetching travel plans:', error);
-            });
+            })
+            .finally(() => {
+                setLoading(false);
+            })
     }, []);
+
+    if(loading) {
+        return <div>Loading...</div>
+    }
+const handleAddActivity = (id) => {
+        navigate(`/add-activity/${id}`);
+    };
 
     const handleView = (id) => {
         navigate(`/travel-plan-view/${id}`)
@@ -50,7 +67,7 @@ const TravelPlansList = () => {
                             <button onClick={() => handleView(plan.id)}>View</button>
                             <button onClick={() => handleEdit(plan.id)}>Edit</button>
                             <button onClick={() => handleDelete(plan.id)}>Delete</button>
-                            <button onClick={() => handleAddActivity(plan)}>Add Activity</button>
+                            <button onClick={() => handleAddActivity(plan.id)}>Add Activity</button>
                         </li>
                     ))}
                     </ul>
