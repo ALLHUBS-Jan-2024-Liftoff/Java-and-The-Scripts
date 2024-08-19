@@ -1,5 +1,6 @@
 package Java_and_The_Scripts.travel_planner.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,12 +22,27 @@ public class ActivityEntity {
     @Column(name = "activity_id")
     private long activityId;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @JoinColumn(name = "travelPlanId")
+    private TravelPlanEntity travelPlanEntity;
+
     public ActivityEntity() {}
 
-    public ActivityEntity(long activityId, String description, int day, UserEntity userEntity) {
+    public ActivityEntity(long activityId, String description, int day, UserEntity userEntity, TravelPlanEntity travelPlanEntity) {
         this.activityId = activityId;
         this.day = day;
         this.userEntity = userEntity;
+        this.description = description;
+        this.travelPlanEntity = travelPlanEntity;
+    }
+
+    public TravelPlanEntity getTravelPlanEntity() {
+        return travelPlanEntity;
+    }
+
+    public void setTravelPlanEntity(TravelPlanEntity travelPlanEntity){
+        this.travelPlanEntity = travelPlanEntity;
     }
 
     public long getActivityId() {

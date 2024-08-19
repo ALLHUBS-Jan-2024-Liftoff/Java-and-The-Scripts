@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-// import './TravelPlanForm.css';
+import {useNavigate} from "react-router-dom";
+
 
 const TravelPlanForm = () => {
   const [travelPlan, setTravelPlan] = useState({
@@ -9,7 +10,7 @@ const TravelPlanForm = () => {
     endDate: '',
     description: '',
   });
-
+const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTravelPlan({ 
@@ -34,6 +35,7 @@ const TravelPlanForm = () => {
         endDate: '',
         description: '',
       });
+    navigate('/travel-plans');
     } catch (error) {
       console.error('There was an error creating the travel plan!', error);
       alert("There was an error creating the travel plan.");

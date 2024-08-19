@@ -64,6 +64,7 @@ const EditTravelPlan = () => {
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
         <button type="button" class="btn btn-secondary" onClick={() => navigate('/travel-plans')}>Back</button>
+
     </div>
   );
 };
