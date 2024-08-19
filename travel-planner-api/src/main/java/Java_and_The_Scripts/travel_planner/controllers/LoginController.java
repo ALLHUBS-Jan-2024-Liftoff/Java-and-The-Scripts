@@ -1,52 +1,41 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
 import Java_and_The_Scripts.travel_planner.entities.UserEntity;
-import Java_and_The_Scripts.travel_planner.models.Login;
 import Java_and_The_Scripts.travel_planner.repositories.UserRepository;
-import jakarta.validation.Valid;
+import Java_and_The_Scripts.travel_planner.services.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
-@RequestMapping("login")
+@RequestMapping("/api/login")
 public class LoginController {
 
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping
-    public String displayLoginForm() {
-
-        // this is a placeholder for now
-        return "login";
-    }
+    @Autowired
+    private JWTService jwtService;
 
     @PostMapping
-    public String logIn(@ModelAttribute @Valid Login login, Errors errors, Model model) {
-        // TODO
-        // Connect User repository
-        // Authenticate with login information
-        // Take client to profile page or display error message depending on result
+    public ResponseEntity<?> login(@RequestParam String email,
+                                   @RequestParam String password) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("error", "Invalid input");
-            // this is a placeholder for now
-            return "login";
+        UserEntity userLoggingIn = userRepository.findByEmail(email);
+
+        if (userLoggingIn == null || !password.equals(userLoggingIn.getPassword())) {
+            throw new IllegalArgumentException("Cannot find user/password combo");
         }
 
-        if (userRepository.existsUserByEmail(login.getEmail())) {
-            UserEntity user = userRepository.findByEmail(login.getEmail());
+        String token = jwtService.generateToken(userLoggingIn);
 
-            if (login.getPassword() == user.getPassword()) {
-                // this is a placeholder for now
-                return "profile";
-            }
-        }
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", token);
+        response.put("user", userLoggingIn);
 
-        model.addAttribute("error", "Incorrect email or password");
-        // this is a placeholder for now
-        return "login";
+        return ResponseEntity.ok(response);
     }
 }
