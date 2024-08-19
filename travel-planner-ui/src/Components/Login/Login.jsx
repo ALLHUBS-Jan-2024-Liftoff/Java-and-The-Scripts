@@ -18,7 +18,7 @@ function Login() {
         setLogin({...login, [name]: value })
     };
 
-    const handleSubmit = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post(
@@ -38,17 +38,19 @@ function Login() {
     return (
         <div>
             <h1>Login</h1>
-            <form className="login-form" onSubmit={handleLogin}>
-                <div className="login-fields">
-                    <label>Email</label>
-                    <input type="email" value={login.email} onChange={handleChange}/>
+            <div className="login-form">
+                <form onSubmit={handleLogin}>
+                    <div className="login-fields">
+                        <label>Email</label>
+                        <input type="email" name="email" value={login.email} onChange={handleChange}/>
 
-                    <label>Password</label>
-                    <input type="password" value={login.password} onChange={handleChange}/>
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            {message && <p>{message}</p>}
+                        <label>Password</label>
+                        <input type="password" name="password" value={login.password} onChange={handleChange}/>
+                    </div>
+                    <button className="login-button" type="submit">Login</button>
+                </form>
+                {message && <p className="alert alert-danger">{message}</p>}
+            </div>
         </div>
     );
 }
