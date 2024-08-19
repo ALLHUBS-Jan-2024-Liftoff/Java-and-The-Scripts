@@ -6,6 +6,10 @@
     border-radius: 8px;
 }
 
-.login-info {
+.login-fields {
+    margin-bottom: 1rem;
+}
+
+.login-button {
     margin-bottom: 1rem;
 }
