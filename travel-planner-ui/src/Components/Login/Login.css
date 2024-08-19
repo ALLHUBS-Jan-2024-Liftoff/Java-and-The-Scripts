@@ -1,0 +1,15 @@
+.login-form {
+    max-width: 250px;
+    margin: 0 auto;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.login-fields {
+    margin-bottom: 1rem;
+}
+
+.login-button {
+    margin-bottom: 1rem;
+}
