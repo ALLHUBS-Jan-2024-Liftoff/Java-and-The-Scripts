@@ -45,6 +45,7 @@ return (
             <ol>
                 {reviews.map(review => (
                     <li key={review.id}>
+                        <p>{review.activityEntity.description}</p>
                         <p>{review.reviewDescription}</p>
                         <p>{review.rating}</p>
                         <button type="button" class="btn btn-warning" onClick={() => handleEdit(review.id)}>Edit</button>
