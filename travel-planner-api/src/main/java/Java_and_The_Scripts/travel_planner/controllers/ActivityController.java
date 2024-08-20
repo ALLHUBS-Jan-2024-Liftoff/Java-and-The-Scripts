@@ -26,7 +26,6 @@ public class ActivityController {
     private TravelPlanRepository travelPlanRepository;
 
     //FETCH ALL ACTIVITIES
-
     @GetMapping
     public List<ActivityEntity> getAllActivities() {
         return activityRepository.findAll();
