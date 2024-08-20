@@ -14,6 +14,7 @@ import ReviewList from './Components/ReviewList/ReviewList';
 import User from './Components/User/User';
 import EditReview from './Components/EditReview/EditReview';
 import ActivityForm from "./Components/Activity/ActivityForm.jsx";
+import Itinerary from "./Components/Itinerary/Itinerary.jsx"
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/reviews/edit-review/:id" element={<EditReview />} /> 
           <Route path="/user" element={<User />} />
           <Route path="/add-activity/:id" element={<ActivityForm/>} />
+          <Route path="/itinerary" element={<Itinerary />} />
         </Routes>
       </main>
     </>

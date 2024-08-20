@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -61,6 +62,9 @@ public class ActivityController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Activity does not exist");
         }
     }
-
+    @GetMapping("/")
+    public List<ActivityEntity> getAllTravelPlans() {
+        return activityRepository.findAll();
+    }
 
 }

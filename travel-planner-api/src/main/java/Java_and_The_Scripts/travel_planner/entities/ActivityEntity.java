@@ -6,14 +6,14 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "activity")
 public class ActivityEntity {
-    @Column(name="day")
+    @Column(name = "day")
     private int day;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
-    @Column(name="activity_desc")
+    @Column(name = "activity_desc")
     private String description;
 
 
@@ -23,11 +23,12 @@ public class ActivityEntity {
     private long activityId;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "travelPlanId")
     private TravelPlanEntity travelPlanEntity;
 
-    public ActivityEntity() {}
+    public ActivityEntity() {
+    }
 
     public ActivityEntity(long activityId, String description, int day, UserEntity userEntity, TravelPlanEntity travelPlanEntity) {
         this.activityId = activityId;
@@ -41,7 +42,7 @@ public class ActivityEntity {
         return travelPlanEntity;
     }
 
-    public void setTravelPlanEntity(TravelPlanEntity travelPlanEntity){
+    public void setTravelPlanEntity(TravelPlanEntity travelPlanEntity) {
         this.travelPlanEntity = travelPlanEntity;
     }
 
