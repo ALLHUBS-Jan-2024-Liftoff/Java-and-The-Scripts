@@ -1,56 +1,49 @@
 import React, { useState } from 'react';
-import axios from 'axios'; 
+
 
 const Places =() => {
-    const [query, setQuery] = useState();
-    const [type, setType] = useState('restaurant');
-    const [location, setLocation] = useState('');
-    const [results, setResults] = useState(); 
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null); 
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]); 
 
-    const handleSearch = async () => {
-        setLoading(true);
-        setError(null); 
 
-        try {
-            const response = await axios.get("http://localhost:8080/api/places", {
-                params: { query, type, location }
-            }); 
-            console.log(response.data.results);
-            setResults(response.data.results);
-        } catch (err) {
-            setError("Error fetching places.");
-        } finally {
-        setLoading(false);
-        }
+    const handleChange = (e) => {
+        setQuery(e.target.value);
+
     };
 
-    return (
-        <div>
-            <h2>Search Places</h2>
-            <input type="text" placeholder="Search" value={query} onChange={(e) => setQuery(e.target.value)} />
-            <select value={type} onChange={(e) => setType(e.target.value)}>
-                <option value="restaurant">Restaurants</option>
-                <option value="hotel">Hotel</option>
-                <option value="tourist_attraction">Activities</option>
-            </select>
-            <input type="text" placeholder="Enter Address or Zip Code" value={location} onChange={(e) => setLocation(e.target.value)} />
-            <button onClick={handleSearch}>Search</button>
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+        if (!query) return;
 
-            {loading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
-            {results && (
+        try {
+            const response = await fetch(`http://localhost:8080/api/places?query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            console.log(data.results);
+            setResults(data.results); 
+        } catch (error) {
+            console.error("Error fetching places.", error);
+        } 
+    };
+
+return (
+    <div>
+        <form onSubmit={handleSubmit}>
+            <input type="text" value={query} onChange={handleChange} placeholder="Search for places" required />
+            <button type="submit">Search</button>
+        </form>
+        <div>
+            {results.length > 0 && (
                 <ul>
-                    {results.map((place) => (
-                        <li key={place.place_id}>
-                            <h3>{place.name}</h3>
-                            <p>{place.formatted_address}</p>
+                    {results.map((result, index) => (
+                        <li key={index}>
+                            <h3>{result.name}</h3>
+                            <p>{result.formatted_address}</p>
                         </li>
                     ))}
                 </ul>
             )}
         </div>
+    </div>
     );
 };
 
