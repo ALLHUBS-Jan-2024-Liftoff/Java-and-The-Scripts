@@ -15,7 +15,7 @@ import User from './Components/User/User';
 import EditReview from './Components/EditReview/EditReview';
 import ActivityForm from "./Components/Activity/ActivityForm.jsx";
 import Itinerary from "./Components/Itinerary/Itinerary.jsx"
-
+import EditActivity from './Components/EditActivity/EditActivity';
 
 function App() {
   return (
@@ -36,6 +36,7 @@ function App() {
           <Route path="/user" element={<User />} />
           <Route path="/add-activity/:id" element={<ActivityForm/>} />
           <Route path="/itinerary" element={<Itinerary />} />
+          <Route path="/itinerary/edit-activity/:id" element={<EditActivity />} />
         </Routes>
       </main>
     </>

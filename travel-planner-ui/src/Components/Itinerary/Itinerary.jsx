@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 
 const Itinerary = () => {
@@ -30,6 +31,24 @@ useEffect(() => {
     if(loading) {
         return <div>Loading...</div>
     }
+const handleDelete = async (id) => {
+        const confirmed = window.confirm("Are you sure you want to delete this activity?")
+        if (confirmed) {
+            try {
+                await axios.delete(`http://localhost:8080/api/activities/${id}`);
+                setActivities(activities.filter(activity => activity.activityId !== id));
+                alert("Activity deleted.")
+                window.location.reload();
+            } catch (error) {
+                console.error("Error deleting activity", error)
+                alert("Error deleting activity.");
+            }
+        }
+    };
+
+    const handleEdit = (id) => {
+        navigate(`edit-activity/${id}`)
+    };
 
 return (
         <div>
@@ -45,6 +64,8 @@ return (
                                         <li key={item.id}>
                                             <p><strong>Day:</strong> {item.day}</p>
                                             <p><strong>Description:</strong> {item.description}</p>
+                                            <button type="button" class="btn btn-warning" onClick={() => handleEdit(item.activityId)}>Edit</button>
+                                            <button type="button" class="btn btn-danger" onClick={() => handleDelete(item.activityId)}>Delete</button>
                                         </li>
 
                                     ))}
@@ -58,7 +79,6 @@ return (
             ) : (
                 <p>No travel plans yet.</p>
             )}
-
             <button type="button" class="btn btn-primary" onClick={() => navigate('/travel-plans')}>Back to Travel Plans List</button>
 
         </div>
