@@ -21,11 +21,9 @@ public class PlacesController {
     }
 
     @GetMapping
-    public ResponseEntity<String> getPlaces( @RequestParam String location) {
-        String type = "restaurant";
-        String url="https://maps.googleapis.com/maps/api/place/textsearch/json" +
-                    "?query=" + type + "in" + location +
-                    "&key=" + apiKey;
+    public ResponseEntity<String> getPlaces( @RequestParam String query) {
+        String url="https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + query + "&key=" + apiKey;
+
         String response = restTemplate.getForObject(url, String.class);
         return ResponseEntity.ok(response);
     }
