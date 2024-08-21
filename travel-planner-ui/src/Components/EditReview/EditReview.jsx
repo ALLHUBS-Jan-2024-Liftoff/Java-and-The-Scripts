@@ -8,18 +8,34 @@ const EditReview = () => {
     const [review, setReview] = useState({
         rating: '',
         reviewDescription: '',
+        activity: ''
     });
 
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/reviews/${id}`)
+       fetch(`http://localhost:8080/api/reviews/${id}`)
             .then(response => {
-                setReview(response.data); 
+                if(!response.ok) {
+                    throw new Error("Error with API")
+                }
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                setReview(data); 
             })
             .catch(error => {
                 console.log("Error fetching review.", error);
-            }); 
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, [id]); 
 
+    if(loading) {
+        return <div>Loading...</div>
+    }
 
     const handleChange = (e) => {
         const {name, value } = e.target; 
@@ -43,6 +59,7 @@ const EditReview = () => {
     <div class="mb-3">
         <h1>Edit Review</h1>
         <form onSubmit={handleSubmit} className="edit-review-form">
+            <h5>{review.activity.description}</h5>
             <label htmlFor="rating" class="form-label">Rating- Enter a number between 1 and 5 (1 being the worst, 5 the best).</label>
             <input type="number" class="form-control" name="rating" value={review.rating} onChange={handleChange} min="1" max="5"/>    
             <label htmlFor="description" class="form-label">Review Description</label> 
