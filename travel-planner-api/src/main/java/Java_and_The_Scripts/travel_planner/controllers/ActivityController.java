@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/activities")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ActivityController {
 
     @Autowired
@@ -23,6 +24,12 @@ public class ActivityController {
 
     @Autowired
     private TravelPlanRepository travelPlanRepository;
+
+    //FETCH ALL ACTIVITIES
+    @GetMapping
+    public List<ActivityEntity> getAllActivities() {
+        return activityRepository.findAll();
+    }
 
     // Create a new activity
     @PostMapping("/new")
@@ -62,9 +69,6 @@ public class ActivityController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Activity does not exist");
         }
     }
-    @GetMapping("/")
-    public List<ActivityEntity> getAllTravelPlans() {
-        return activityRepository.findAll();
-    }
+
 
 }
