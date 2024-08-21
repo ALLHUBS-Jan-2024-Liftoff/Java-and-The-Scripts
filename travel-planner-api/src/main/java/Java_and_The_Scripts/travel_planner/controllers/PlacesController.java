@@ -2,7 +2,6 @@ package Java_and_The_Scripts.travel_planner.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +21,10 @@ public class PlacesController {
     }
 
     @GetMapping
-    public ResponseEntity<String> getPlaces(@RequestParam String location, @RequestParam String radius) {
-        String url="http://maps.googleapis.com/maps/api/place/nearbysearch/json" +
-                    "?location=" + location +
-                    "&radius=" + radius +
+    public ResponseEntity<String> getPlaces( @RequestParam String location) {
+        String type = "restaurant";
+        String url="https://maps.googleapis.com/maps/api/place/textsearch/json" +
+                    "?query=" + type + "in" + location +
                     "&key=" + apiKey;
         String response = restTemplate.getForObject(url, String.class);
         return ResponseEntity.ok(response);
