@@ -1,6 +1,7 @@
 import React, { useState } from 'react'; 
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 const CreateReview = () => {
     const [review, setReview] = useState({
@@ -33,16 +34,16 @@ const CreateReview = () => {
     }
 
 return (
-    <div class="mb-3">
+    <Container className="px-3">
         <h1>Create Review</h1>
         <form onSubmit={handleSubmit} className="create-review-form">
-            <label htmlFor="rating" class="form-label">Rating- Enter a number between 1 and 5 (1 being the worst, 5 the best).</label>
-            <input type="number" class="form-control" name="rating" value={review.rating} onChange={handleChange} min="1" max="5"/>    
-            <label htmlFor="reviewDescription" class="form-label">Review Description</label> 
-            <input type="text" class="form-control" placeholder="Enter a comment" name="reviewDescription" value={review.reviewDescription} onChange={handleChange} />
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <label htmlFor="rating" className="form-label">Rating- Enter a number between 1 and 5 (1 being the worst, 5 the best).</label>
+            <input type="number" className="form-control" name="rating" value={review.rating} onChange={handleChange} min="1" max="5"/>    
+            <label htmlFor="reviewDescription" className="form-label">Review Description</label> 
+            <input type="text" className="form-control" placeholder="Enter a comment" name="reviewDescription" value={review.reviewDescription} onChange={handleChange} />
+            <button type="submit" className="btn btn-primary">Submit</button>
         </form>
-    </div>
+    </Container>
 )};
 
 export default CreateReview; 

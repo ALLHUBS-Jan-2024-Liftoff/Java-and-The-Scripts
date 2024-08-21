@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @CrossOrigin(origins = "http://localhost:5173")
 public class PlacesController {
 
-    private final String apiKey = "AIzaSyBkCRW0QYwUthrLiJkk4FZe5x0KkSYYc7Y";
+    private final String apiKey = "";
     private final RestTemplate restTemplate;
 
     @Autowired
