@@ -65,7 +65,7 @@ const CreateReview = () => {
     };
 
 return (
-    <Container className="px-3">
+    <div class="mb-3">
         <h1>Create Review</h1>
         <form onSubmit={handleSubmit} className="create-review-form">
             <label htmlFor="activity" class="form-label">Select Activity</label>
@@ -81,7 +81,7 @@ return (
             <input type="text" class="form-control" placeholder="Enter a comment" name="reviewDescription" value={review.reviewDescription} onChange={handleChange} />
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-    </Container>
+    </div>
 )};
 
 export default CreateReview; 

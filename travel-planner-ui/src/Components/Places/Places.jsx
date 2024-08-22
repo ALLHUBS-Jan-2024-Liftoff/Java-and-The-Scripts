@@ -26,21 +26,26 @@ const Places =() => {
     };
 
 return (
-    <div>
+    <div class="mb-3">
         <form onSubmit={handleSubmit}>
             <input type="text" value={query} onChange={handleChange} placeholder="Search for places" required />
-            <button type="submit">Search</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <div>
-            {results.length > 0 && (
+        <div class="mb-3">
+            {results.length > 0 ? (
                 <ul>
-                    {results.map((result, index) => (
+                    {results.map((place, index) => (
                         <li key={index}>
-                            <h3>{result.name}</h3>
-                            <p>{result.formatted_address}</p>
+                            <h3>{place.name}</h3>
+                            <p>{place.formatted_address}</p>
+                            <p>Rating : {place.rating || 'No rating'}</p>
+                            <p>Price Level: {place.price_level !== undefined ? `$${place.price_level}` : 'Not available'}</p>
+                            <p>Opening Hours: {place.opening_hours?.open_now ? 'Open now' : 'Closed'}</p>
                         </li>
                     ))}
                 </ul>
+            ) : ( 
+                <p>No results found.</p>  
             )}
         </div>
     </div>
