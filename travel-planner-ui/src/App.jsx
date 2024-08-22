@@ -16,6 +16,8 @@ import EditReview from './Components/EditReview/EditReview';
 import ActivityForm from "./Components/Activity/ActivityForm.jsx";
 import Itinerary from "./Components/Itinerary/Itinerary.jsx"
 import EditActivity from './Components/EditActivity/EditActivity';
+import PlacesSearchPage from './Components/PlacesSearchPage/PlacesSearchPage.jsx';
+
 
 function App() {
   return (
@@ -37,6 +39,7 @@ function App() {
           <Route path="/add-activity/:id" element={<ActivityForm/>} />
           <Route path="/itinerary" element={<Itinerary />} />
           <Route path="/itinerary/edit-activity/:id" element={<EditActivity />} />
+          <Route path="/search-places" element={<PlacesSearchPage/>} />
         </Routes>
       </main>
     </>
