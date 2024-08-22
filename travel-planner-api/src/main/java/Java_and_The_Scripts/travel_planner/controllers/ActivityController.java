@@ -5,6 +5,7 @@ import Java_and_The_Scripts.travel_planner.entities.ActivityEntity;
 import Java_and_The_Scripts.travel_planner.entities.EntityMapper;
 import Java_and_The_Scripts.travel_planner.models.Activity;
 import Java_and_The_Scripts.travel_planner.repositories.ActivityRepository;
+import Java_and_The_Scripts.travel_planner.repositories.ReviewRepository;
 import Java_and_The_Scripts.travel_planner.repositories.TravelPlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,8 @@ public class ActivityController {
 
     @Autowired
     private TravelPlanRepository travelPlanRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     //FETCH ALL ACTIVITIES
     @GetMapping
@@ -51,7 +54,7 @@ public class ActivityController {
             ActivityEntity activityEntity = EntityMapper.mapper.activityToActivityEntity(activity);
             activityEntity.setActivityId(id);
 
-            activityRepository.save(activityEntity);
+            activityRepository.updateActivity(activityEntity.getDay(),activityEntity.getDescription(),activityEntity.getActivityId());
 
             return "Activity updated successfully!";
         } else {
@@ -63,11 +66,14 @@ public class ActivityController {
     @DeleteMapping("/{id}")
     public String deleteActivity(@PathVariable Long id) {
         if (activityRepository.existsById(id)) {
-            travelPlanRepository.deleteById(id);
+            ActivityEntity activityEntity = activityRepository.getById(id);
+            reviewRepository.deletebyActivityId(activityEntity.getActivityId());
+            activityRepository.deleteById(id);
             return "Activity deleted successfully!";
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Activity does not exist");
         }
     }
+
 
 }
