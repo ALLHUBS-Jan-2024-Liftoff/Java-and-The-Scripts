@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({setAuthenticated}) {
     const [login, setLogin] = useState({
         email: '',
         password: ''
@@ -28,6 +28,7 @@ function Login() {
                     withCredentials: true
                 }
             );
+            setAuthenticated(true);
             setMessage(response.data.message);
             navigate("/profile");
         } catch (error) {

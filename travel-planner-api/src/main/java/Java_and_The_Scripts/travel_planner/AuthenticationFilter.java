@@ -23,7 +23,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
 
     private static boolean isWhiteListed(String path) {
         for (String pathRoot : whitelist) {
-            if (path.equals(pathRoot)) {
+            if (path.startsWith(pathRoot)) {
                 return true;
             }
         }
@@ -33,7 +33,10 @@ public class AuthenticationFilter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        System.out.println(request.getRequestURI());
+
         if (isWhiteListed(request.getRequestURI())) {
+            System.out.println("Requested URI is whitelisted");
             return true;
         }
 

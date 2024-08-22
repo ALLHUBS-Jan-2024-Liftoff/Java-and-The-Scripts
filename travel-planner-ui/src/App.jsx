@@ -1,6 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 import Header from "./Components/Header/Header";
 import Home from './Components/Home/Home'; 
 import Login from './Components/Login/Login';
@@ -21,14 +22,17 @@ import PlacesSearchPage from './Components/PlacesSearchPage/PlacesSearchPage.jsx
 
 
 function App() {
+  const [authenticated, setAuthenticated] = useState(false);
+  console.log(authenticated);
+
   return (
     <>
-      <Header /> 
+      <Header authenticated={authenticated} /> 
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login setAuthenticated={setAuthenticated} />} />
+          <Route path="/register" element={<Register setAuthenticated={setAuthenticated} />} />
           <Route path="/profile" element={<Profile />} /> 
           <Route path="/create-travel-plan" element={<TravelPlanForm />} />
           <Route path="/travel-plan-view/:id" element={<TravelPlanView />} />
