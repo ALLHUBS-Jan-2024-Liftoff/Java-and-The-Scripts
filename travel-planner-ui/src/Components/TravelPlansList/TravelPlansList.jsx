@@ -9,7 +9,7 @@ const TravelPlansList = () => {
     const [loading, setLoading] = useState(true);
 
 useEffect(() => {
-        fetch('http://localhost:8080/api/travelplans/')
+        fetch('http://localhost:8080/api/travelplans/', {credentials: "include"})
             .then(response => {
                 if(!response.ok) {
                     throw new Error("Response from API Error")
@@ -45,7 +45,7 @@ const handleAddActivity = (id) => {
     const handleDelete = (id) => {
         const confirmed = window.confirm("Are you sure you want to delete this travel plan?")
         if (confirmed) {
-            axios.delete(`http://localhost:8080/api/travelplans/${id}`)
+            axios.delete(`http://localhost:8080/api/travelplans/${id}`, {withCredentials: true})
                 .then(() => {
                     // Remove the deleted travel plan from the state
                     setTravelPlans(travelPlans.filter(plan => plan.id !== id));
@@ -60,7 +60,7 @@ const handleAddActivity = (id) => {
 
     return (
         <div>
-            <h1>All Travel Plans</h1>
+            <h1>Your Travel Plans</h1>
                 {travelPlans.length > 0 ? (
                     <ol>
                         {travelPlans.map(plan => (

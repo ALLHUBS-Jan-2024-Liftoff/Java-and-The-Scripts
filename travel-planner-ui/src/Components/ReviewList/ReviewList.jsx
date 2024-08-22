@@ -7,7 +7,7 @@ const ReviewList = () => {
     const navigate = useNavigate(); 
 
     useEffect(() => { 
-        axios.get('http://localhost:8080/api/reviews')
+        axios.get('http://localhost:8080/api/reviews', {withCredentials: true})
             .then(response => {
                 setReviews(response.data)
             })
@@ -38,7 +38,7 @@ const ReviewList = () => {
 
 return (
     <div>
-        <h1>All Reviews</h1>
+        <h1>Your Reviews</h1>
         {reviews.length === 0 ? (
                 <p>No reviews yet.</p>
         ) : ( 

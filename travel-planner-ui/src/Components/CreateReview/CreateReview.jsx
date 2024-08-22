@@ -53,6 +53,7 @@ const CreateReview = () => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:8080/api/reviews/new', review, {
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }

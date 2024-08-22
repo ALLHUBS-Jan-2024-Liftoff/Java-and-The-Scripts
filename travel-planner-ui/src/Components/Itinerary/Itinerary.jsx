@@ -26,7 +26,7 @@ const Itinerary = () => {
     const [likedItems, setLikedItems] = useState(getInitialLikedItems);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/travelplans/')
+        fetch('http://localhost:8080/api/travelplans/', {credentials: "include"})
             .then(response => {
                 if(!response.ok) {
                     throw new Error("Response from API Error")
@@ -56,7 +56,7 @@ const Itinerary = () => {
         const confirmed = window.confirm("Are you sure you want to delete this activity?")
         if (confirmed) {
             try {
-                await axios.delete(`http://localhost:8080/api/activities/${id}`);
+                await axios.delete(`http://localhost:8080/api/activities/${id}`, {withCredentials: true});
                 setActivities(activities.filter(activity => activity.activityId !== id));
                 alert("Activity deleted.")
                 window.location.reload();
