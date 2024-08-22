@@ -1,0 +1,15 @@
+.register-form {
+    max-width: 250px;
+    margin: 0 auto;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.registration-fields {
+    margin-bottom: 1rem;
+}
+
+.register-button {
+    margin-bottom: 1rem;
+}
