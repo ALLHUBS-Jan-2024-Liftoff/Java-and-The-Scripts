@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from "./Components/Header/Header";
 import Home from './Components/Home/Home'; 
 import Login from './Components/Login/Login';
+import Register from './Components/Register/Register.jsx';
 import Profile from './Components/Profile/Profile'; 
 import TravelPlanForm from "./Components/TravelPlan/TravelPlanForm"; 
 import TravelPlansList from './Components/TravelPlansList/TravelPlansList';
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} /> 
           <Route path="/create-travel-plan" element={<TravelPlanForm />} />
           <Route path="/travel-plan-view/:id" element={<TravelPlanView />} />

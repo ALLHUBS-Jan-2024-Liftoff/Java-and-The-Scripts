@@ -49,6 +49,7 @@ function Login() {
                     </div>
                     <button className="login-button" type="submit">Login</button>
                 </form>
+                <a href="/register">Create Account</a>
                 {message && <p className="alert alert-danger">{message}</p>}
             </div>
         </div>

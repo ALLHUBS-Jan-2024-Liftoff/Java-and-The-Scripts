@@ -1,7 +1,9 @@
 package Java_and_The_Scripts.travel_planner.controllers;
 
+import Java_and_The_Scripts.travel_planner.entities.EntityMapper;
 import Java_and_The_Scripts.travel_planner.entities.UserEntity;
 import Java_and_The_Scripts.travel_planner.models.LoginDTO;
+import Java_and_The_Scripts.travel_planner.models.User;
 import Java_and_The_Scripts.travel_planner.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -41,6 +43,35 @@ public class AuthController {
 
     private static void setUserInSession(HttpSession session, UserEntity user) {
         session.setAttribute(userSessionKey, user.getId());
+    }
+
+    @PostMapping(value = "/register")
+    public ResponseEntity<Map> register(@RequestBody User newUser, HttpServletRequest request) {
+        ResponseEntity response = null;
+        Map<String, String> responseBody = new HashMap<>();
+        UserEntity userEntity = EntityMapper.mapper.userToUserEntity(newUser);
+        UserEntity existingUser = userRepository.findByEmail(newUser.getEmail());
+
+        if (newUser.getEmail() == null || newUser.getFirstName() == null || newUser.getLastName() == null || newUser.getPassword() == null) {
+            responseBody.put("message", "Please fill in all fields");
+            response = ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(responseBody);
+        } else if (existingUser != null) {
+            responseBody.put("message", "Email already in use");
+            response = ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(responseBody);
+        } else {
+            userRepository.save(userEntity);
+            setUserInSession(request.getSession(), userEntity);
+            responseBody.put("message", "Account created successfully");
+            responseBody.put("email", newUser.getEmail());
+            response = ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(responseBody);
+        }
+        return response;
     }
 
     @PostMapping(value="/login")
