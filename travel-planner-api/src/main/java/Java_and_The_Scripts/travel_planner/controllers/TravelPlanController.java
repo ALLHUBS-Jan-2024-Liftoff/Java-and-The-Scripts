@@ -7,6 +7,7 @@ import Java_and_The_Scripts.travel_planner.models.TravelPlan;
 import Java_and_The_Scripts.travel_planner.repositories.ActivityRepository;
 import Java_and_The_Scripts.travel_planner.repositories.ReviewRepository;
 import Java_and_The_Scripts.travel_planner.repositories.TravelPlanRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +31,21 @@ public class TravelPlanController {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private AuthController authController;
+
     // CREATE A NEW TRAVEL PLAN
     @PostMapping("/new")
-    public TravelPlanEntity createTravelPlan(@RequestBody TravelPlan travelPlan) {
-
+    public TravelPlanEntity createTravelPlan(@RequestBody TravelPlan travelPlan, HttpServletRequest request) {
         TravelPlanEntity travelPlanEntity = EntityMapper.mapper.travelPlanToTravelPlanEntity(travelPlan);
+        travelPlanEntity.setUserId(authController.getUserFromSession(request.getSession()));
         return travelPlanRepository.save(travelPlanEntity);
     }
 
     // GET ALL TRAVEL PLANS
     @GetMapping("/")
-    public List<TravelPlanEntity> getAllTravelPlans() {
-        return travelPlanRepository.findAll();
+    public List<TravelPlanEntity> getAllTravelPlans(HttpServletRequest request) {
+        return travelPlanRepository.findByUserId(authController.getUserFromSession(request.getSession()).getId());
     }
 
     // GET ALL TRAVEL PLANS FOR A USER

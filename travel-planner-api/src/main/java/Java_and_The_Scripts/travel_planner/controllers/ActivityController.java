@@ -7,6 +7,7 @@ import Java_and_The_Scripts.travel_planner.models.Activity;
 import Java_and_The_Scripts.travel_planner.repositories.ActivityRepository;
 import Java_and_The_Scripts.travel_planner.repositories.ReviewRepository;
 import Java_and_The_Scripts.travel_planner.repositories.TravelPlanRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,9 @@ public class ActivityController {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private AuthController authController;
+
     //FETCH ALL ACTIVITIES
     @GetMapping
     public List<ActivityEntity> getAllActivities() {
@@ -36,8 +40,9 @@ public class ActivityController {
 
     // Create a new activity
     @PostMapping("/new")
-    public ActivityEntity createActivity(@RequestBody Activity activity){
+    public ActivityEntity createActivity(@RequestBody Activity activity, HttpServletRequest request){
         ActivityEntity activityEntity = EntityMapper.mapper.activityToActivityEntity(activity);
+        activityEntity.setUser(authController.getUserFromSession(request.getSession()));
         return activityRepository.save(activityEntity);
     }
 

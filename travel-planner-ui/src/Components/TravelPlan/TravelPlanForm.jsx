@@ -23,6 +23,7 @@ const navigate = useNavigate();
     e.preventDefault();
     try {
       await axios.post('http://localhost:8080/api/travelplans/new', travelPlan, {
+        withCredentials: true,
         headers: {
           'Content-Type': 'application/json'
         }

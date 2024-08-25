@@ -15,7 +15,7 @@ const ActivityForm = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:8080/api/travelplans/${id}`)
+        fetch(`http://localhost:8080/api/travelplans/${id}`, {credentials: "include"})
             .then(response => {
                 if(!response.ok) {
                     throw new Error("Response from API Error")
@@ -53,6 +53,7 @@ const ActivityForm = () => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:8080/api/activities/new', activity, {
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
