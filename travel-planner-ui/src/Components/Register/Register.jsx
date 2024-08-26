@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Register() {
+function Register({setAuthenticated}) {
     const [accountInfo, setAccountInfo] = useState({
         email: '',
         firstName: '',
@@ -30,6 +30,7 @@ function Register() {
                     withCredentials: true
                 }
             );
+            setAuthenticated(true);
             setMessage(response.data.message);
             navigate("/profile");
         } catch (error) {
