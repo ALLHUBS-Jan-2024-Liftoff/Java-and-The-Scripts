@@ -23,7 +23,7 @@ public class AuthenticationFilter implements HandlerInterceptor {
 
     private static boolean isWhiteListed(String path) {
         for (String pathRoot : whitelist) {
-            if (path.equals(pathRoot)) {
+            if (path.startsWith(pathRoot)) {
                 return true;
             }
         }
